@@ -1,0 +1,137 @@
+---
+/**
+ * Newsletter „Paper Notes”.
+ * variant="dark"  — odwrócona ciemna sekcja z landingu
+ * variant="light" — jasny baner ze strony odcinka
+ */
+import { site } from '../data/site';
+
+interface Props {
+  variant?: 'dark' | 'light';
+  id?: string;
+}
+
+const { variant = 'dark', id = 'newsletter' } = Astro.props;
+const action = site.newsletterAction;
+---
+
+{
+  variant === 'dark' ? (
+    <section class="bg-dark-bg text-dark-text py-20 border-t border-hairline" id={id}>
+      <div class="container-site">
+        <div class="max-w-3xl">
+          <div class="meta-tag text-dark-accent mb-4">CYKLICZNY BIULETYN INŻYNIERSKI</div>
+          <h2 class="font-display-hero text-[48px] sm:text-[64px] text-dark-text mb-6">
+            NOTATKI Z PAPIERU W TWOJEJ SKRZYNCE
+          </h2>
+          <p class="font-sans text-dark-muted text-lg lg:text-xl leading-relaxed mb-10">
+            Raz na dwa tygodnie wysyłamy esencję: diagramy, szkice architektoniczne, wnioski z
+            warsztatów i dodatkowe materiały do każdego odcinka. Zero spamu.
+          </p>
+
+          <form
+            class="flex flex-col sm:flex-row gap-3 max-w-xl"
+            method="post"
+            action={action || undefined}
+            data-newsletter-form
+            data-demo={action ? undefined : 'true'}
+          >
+            <label class="sr-only" for={`${id}-email`}>
+              Adres e-mail
+            </label>
+            <input
+              class="w-full bg-dark-input border border-dark-border text-dark-text placeholder-dark-muted px-6 py-3.5 rounded-full font-mono text-sm focus:outline-none focus:border-dark-accent"
+              id={`${id}-email`}
+              name="email"
+              placeholder="twój.adres@domena.pl"
+              required
+              type="email"
+              autocomplete="email"
+            />
+            <button
+              class="bg-dark-accent hover:bg-dark-accent-hover text-dark-accent-text font-semibold px-8 py-3.5 rounded-full text-sm shrink-0 transition-colors"
+              type="submit"
+            >
+              Zapisz się do listy
+            </button>
+          </form>
+          <p class="font-mono text-xs text-control mt-4" data-newsletter-note>
+            Dołączyło już ponad {site.newsletterSubscribers} architektów i tech leadów. Wypisanie
+            jednym kliknięciem.
+          </p>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="container-site py-12" id={id}>
+      <div class="bg-surface-container-high rounded-[32px] p-8 lg:p-14 relative overflow-hidden">
+        <svg
+          aria-hidden="true"
+          class="absolute -left-12 -bottom-10 w-[320px] h-[220px] pointer-events-none opacity-30"
+          fill="none"
+          viewBox="0 0 320 220"
+        >
+          <path d="M 10 110 C 90 20 180 200 290 100" stroke="#2F6FED" stroke-dasharray="4 4" stroke-width="2" />
+        </svg>
+        <div class="relative z-10 max-w-2xl flex flex-col gap-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest text-primary font-mono text-[11px] tracking-mono font-bold uppercase self-start">
+            <span class="material-symbols-outlined text-[14px]">mark_email_read</span>
+            <span>PDD Paper Notes Newsletter</span>
+          </div>
+          <h3 class="font-display text-headline-md uppercase text-on-surface">
+            NIE PRZEGAP NOTATEK WIZUALNYCH DO NASTĘPNYCH ODCINKÓW
+          </h3>
+          <p class="font-sans text-body-md text-tertiary">
+            Co dwa tygodnie wysyłamy jeden zwięzły e-mail z ręcznie rysowanymi schematami
+            architektonicznymi, wyciągiem z decyzji technicznych oraz linkiem do odsłuchu przed
+            oficjalną premierą. Zero spamu.
+          </p>
+          <form
+            class="flex flex-col sm:flex-row items-stretch gap-3 pt-3"
+            method="post"
+            action={action || undefined}
+            data-newsletter-form
+            data-demo={action ? undefined : 'true'}
+          >
+            <label class="sr-only" for={`${id}-email`}>
+              Adres e-mail
+            </label>
+            <input
+              id={`${id}-email`}
+              name="email"
+              class="px-5 py-3.5 rounded-full bg-surface-container-lowest text-on-surface font-sans text-body-md focus:outline-none focus:ring-2 focus:ring-primary flex-grow border-0"
+              placeholder="twoj.email@organizacja.pl"
+              required
+              type="email"
+              autocomplete="email"
+            />
+            <button
+              class="px-7 py-3.5 rounded-full bg-primary text-on-primary font-sans text-label-ui font-bold hover:bg-secondary transition-colors whitespace-nowrap"
+              type="submit"
+            >
+              Zapisz się bezpłatnie
+            </button>
+          </form>
+          <span class="font-mono text-[11px] text-tertiary" data-newsletter-note>
+            Ponad {site.newsletterSubscribers} subskrybujących architektów i inżynierów w Polsce.
+          </span>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  // Tryb demo: dopóki w src/data/site.ts nie ma newsletterAction, formularz tylko potwierdza zapis.
+  document.querySelectorAll<HTMLFormElement>('[data-newsletter-form][data-demo]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const note = form.parentElement?.querySelector('[data-newsletter-note]');
+      const input = form.querySelector<HTMLInputElement>('input[type="email"]');
+      if (note) {
+        note.textContent = `Dziękujemy! ${input?.value ?? ''} — potwierdzenie zapisu wyślemy, gdy lista ruszy.`;
+      }
+      form.reset();
+    });
+  });
+</script>

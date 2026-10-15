@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Paper Driven Design — design tokens
+   Źródło: paper_driven_design/DESIGN.md + makiety Stitch
+   ------------------------------------------------------------------ */
+@theme {
+  /* Paleta "papier i tusz" (landing) */
+  --color-paper: #f8f6f1;
+  --color-card: #fffdf9;
+  --color-card-soft: #faf7f2;
+  --color-card-hover: #f4efe6;
+  --color-sunken: #efebe2;
+  --color-sunken-deep: #eae4d7;
+  --color-ink: #1f1e1c;
+  --color-ink-muted: #5f5a52;
+  --color-hairline: #ddd6c8;
+  --color-control: #8a8275;
+
+  /* Akcent "Flight Blue" */
+  --color-flight: #2f6fed;
+  --color-flight-link: #2a5bd0;
+  --color-flight-light: #dde6fb;
+
+  /* Odwrócona ciemna powierzchnia (newsletter, stopka) */
+  --color-dark-bg: #1f1e1c;
+  --color-dark-input: #10131c;
+  --color-dark-text: #f3f0e8;
+  --color-dark-muted: #b3ad9f;
+  --color-dark-accent: #6f9bff;
+  --color-dark-accent-hover: #85abff;
+  --color-dark-accent-text: #10131c;
+  --color-dark-border: #363430;
+
+  /* Tokeny powierzchni strony odcinka (DESIGN.md) */
+  --color-surface: #fdf8f5;
+  --color-surface-dim: #ddd9d6;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f7f3ef;
+  --color-surface-container: #f2ede9;
+  --color-surface-container-high: #ece7e4;
+  --color-surface-container-highest: #e6e2de;
+  --color-surface-variant: #e6e2de;
+  --color-on-surface: #1c1b19;
+  --color-on-surface-variant: #424654;
+  --color-outline: #737786;
+  --color-outline-variant: #c2c6d7;
+  --color-primary: #0055ce;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed: #dae2ff;
+  --color-primary-fixed-dim: #b1c5ff;
+  --color-on-primary-fixed: #001847;
+  --color-secondary: #1f53c8;
+  --color-on-secondary: #ffffff;
+  --color-tertiary: #545d6f;
+  --color-tertiary-fixed: #dae3f8;
+  --color-on-tertiary-fixed: #131c2b;
+
+  /* Typografia */
+  --font-display: "Big Shoulders Display", "Anton", Impact, sans-serif;
+  --font-sans: "Instrument Sans", "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "Space Mono", ui-monospace, monospace;
+
+  --text-headline-lg: 56px;
+  --text-headline-lg--line-height: 52px;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-headline-lg--font-weight: 800;
+  --text-headline-md: 36px;
+  --text-headline-md--line-height: 34px;
+  --text-headline-md--font-weight: 800;
+  --text-headline-sm: 24px;
+  --text-headline-sm--line-height: 24px;
+  --text-headline-sm--letter-spacing: 0.01em;
+  --text-headline-sm--font-weight: 800;
+  --text-lead: 20px;
+  --text-lead--line-height: 31px;
+  --text-lead--letter-spacing: -0.01em;
+  --text-body-md: 16px;
+  --text-body-md--line-height: 26px;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 22px;
+  --text-label-ui: 14px;
+  --text-label-ui--line-height: 20px;
+  --text-label-ui--letter-spacing: 0.01em;
+  --text-label-ui--font-weight: 600;
+  --text-mono-meta: 12px;
+  --text-mono-meta--line-height: 16px;
+  --text-mono-meta--letter-spacing: 0.08em;
+  --text-mono-meta--font-weight: 500;
+
+  --tracking-mono: 0.08em;
+
+  /* Siatka */
+  --container-site: 1440px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-flight-light);
+    color: var(--color-flight);
+  }
+
+  /* Ikony Material Symbols (tylko strona odcinka) */
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    line-height: 1;
+    user-select: none;
+  }
+  .material-symbols-outlined.is-filled {
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+  }
+}
+
+@layer components {
+  /* Nagłówki wyświetleniowe — zawsze wersaliki, bardzo ciasna interlinia */
+  .font-display-hero {
+    font-family: var(--font-display);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .font-display-section {
+    font-family: var(--font-display);
+    line-height: 0.92;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .font-display-card {
+    font-family: var(--font-display);
+    line-height: 1.05;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* Monospace metadane: EP // 042, czas trwania, numery rozdziałów */
+  .meta-tag {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
+  /* Przyciski */
+  .btn-flight {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-flight);
+    color: #ffffff;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    transition:
+      background-color 0.15s ease,
+      transform 0.1s ease;
+    box-shadow: none !important;
+  }
+  .btn-flight:hover {
+    background-color: var(--color-flight-link);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--color-ink);
+    color: var(--color-ink);
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: none !important;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .btn-secondary:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* Chipy tematów */
+  .tag-pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-control);
+    color: var(--color-ink-muted);
+    border-radius: 2px;
+    padding: 3px 8px;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    cursor: default;
+    transition: all 0.15s ease;
+  }
+  button.tag-pill {
+    cursor: pointer;
+  }
+  .tag-pill:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+  .tag-pill.active,
+  .tag-pill[aria-pressed="true"] {
+    background: var(--color-flight-light);
+    border-color: var(--color-flight);
+    color: var(--color-flight);
+    font-weight: 600;
+  }
+
+  /* Pastylki platform / akcji na stronie odcinka */
+  .pill-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background-color: var(--color-surface-container);
+    color: var(--color-on-surface);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: background-color 0.15s ease;
+  }
+  .pill-action:hover {
+    background-color: var(--color-surface-container-high);
+  }
+}
+
+@layer utilities {
+  .container-site {
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 64rem) {
+    .container-site {
+      padding-inline: 3rem;
+    }
+  }
+}

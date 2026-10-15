@@ -1,0 +1,57 @@
+---
+/**
+ * Logotyp: trzy wersy PAPER / DRIVEN / DESIGN + znak FlightPath z papierowym samolotem.
+ */
+interface Props {
+  variant?: 'light' | 'dark';
+  size?: 'md' | 'sm';
+  href?: string;
+  class?: string;
+}
+
+const { variant = 'light', size = 'md', href = '/', class: className = '' } = Astro.props;
+
+const textColor = variant === 'dark' ? 'text-dark-text' : 'text-ink';
+const pathStroke = variant === 'dark' ? '#6F9BFF' : '#2F6FED';
+const planeStroke = variant === 'dark' ? '#F3F0E8' : '#1F1E1C';
+const textSize = size === 'sm' ? 'text-lg' : 'text-xl';
+const markSize = size === 'sm' ? 'w-12 h-7' : 'w-14 h-9';
+---
+
+<a
+  href={href}
+  aria-label="Paper Driven Design — strona główna"
+  class:list={['flex items-center gap-3 group focus:outline-none', className]}
+>
+  <span
+    class:list={[
+      'flex flex-col text-left font-display font-black tracking-tighter leading-[0.88]',
+      textSize,
+      textColor,
+    ]}
+  >
+    <span>PAPER</span>
+    <span>DRIVEN</span>
+    <span>DESIGN</span>
+  </span>
+  <svg
+    aria-hidden="true"
+    class:list={[markSize, 'overflow-visible']}
+    fill="none"
+    viewBox="0 0 70 36"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M 2 24 H 14 C 24 24 28 8 18 8 C 10 8 10 24 26 24 C 36 24 40 14 46 12"
+      stroke={pathStroke}
+      stroke-dasharray="3.5 4"
+      stroke-linecap="round"
+      stroke-width="2.2"></path>
+    <path
+      d="M 46 12 L 66 4 L 56 22 L 52 14 L 46 12 Z M 66 4 L 52 14"
+      fill="none"
+      stroke={planeStroke}
+      stroke-linejoin="round"
+      stroke-width="1.8"></path>
+  </svg>
+</a>

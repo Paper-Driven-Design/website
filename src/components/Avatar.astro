@@ -1,0 +1,49 @@
+---
+/**
+ * Awatar prowadzącego: zdjęcie, a gdy go brak — inicjały na tle tuszu.
+ */
+interface Props {
+  name: string;
+  initials: string;
+  photo?: string;
+  size?: 'lg' | 'md' | 'sm';
+  tone?: 'ink' | 'soft' | 'softer';
+  class?: string;
+}
+
+const { name, initials, photo = '', size = 'md', tone = 'ink', class: className = '' } = Astro.props;
+
+const sizes = {
+  lg: 'w-24 h-24 text-3xl',
+  md: 'w-14 h-14 text-lg',
+  sm: 'w-10 h-10 text-[13px]',
+};
+const tones = {
+  ink: 'bg-ink text-white font-display font-extrabold tracking-tighter',
+  soft: 'bg-surface-container-high text-primary font-mono font-bold',
+  softer: 'bg-surface-container-highest text-secondary font-mono font-bold',
+};
+---
+
+{
+  photo ? (
+    <img
+      src={photo}
+      alt={`Portret: ${name}`}
+      class:list={['rounded-full object-cover shrink-0 bg-surface-variant', sizes[size], className]}
+      loading="lazy"
+    />
+  ) : (
+    <span
+      aria-hidden="true"
+      class:list={[
+        'rounded-full shrink-0 inline-flex items-center justify-center overflow-hidden',
+        sizes[size],
+        tones[tone],
+        className,
+      ]}
+    >
+      {initials}
+    </span>
+  )
+}

@@ -1,0 +1,278 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EpisodeCard from '../components/EpisodeCard.astro';
+import FlightPathSeparator from '../components/FlightPathSeparator.astro';
+import Newsletter from '../components/Newsletter.astro';
+import PlayIcon from '../components/PlayIcon.astro';
+import Avatar from '../components/Avatar.astro';
+import { site } from '../data/site';
+
+const all = await getCollection('episodes');
+const published = all
+  .filter((e) => e.data.status === 'published')
+  .sort((a, b) => b.data.number - a.data.number);
+const upcoming = all
+  .filter((e) => e.data.status === 'upcoming')
+  .sort((a, b) => a.data.number - b.data.number)[0];
+
+const latest = published[0];
+const latestNumber = String(latest.data.number).padStart(3, '0');
+const latestHref = `/odcinki/${latest.id}/`;
+const latestDurationSeconds = latest.data.duration
+  .split(':')
+  .reduce((acc, part) => acc * 60 + Number(part), 0);
+
+const allTags = Array.from(new Set(published.flatMap((e) => e.data.tags)));
+const seasonLabel = `S${String(latest.data.season).padStart(2, '0')}`;
+const episodeCountLabel = String(published.length).padStart(2, '0');
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="container-site pt-16 pb-20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-8 flex flex-col">
+        <div class="meta-tag text-ink-muted mb-6 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-flight inline-block"></span>
+          {site.tagline.toUpperCase()}
+        </div>
+        <h1 class="font-display-hero text-[56px] sm:text-[96px] lg:text-[116px] text-ink mb-8 max-w-5xl break-words">
+          ROZMAWIAMY O OPROGRAMOWANIU ZANIM TRAFI DO KODU.
+        </h1>
+        <p class="font-sans text-xl lg:text-2xl text-ink-muted leading-relaxed max-w-3xl mb-10 font-normal">
+          {site.description}
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a class="btn-flight px-7 py-3.5 text-base gap-3" href="#najnowszy-odcinek">
+            <PlayIcon class="w-4 h-4" />
+            <span>Odsłuchaj najnowszy odcinek</span>
+          </a>
+          <a class="btn-secondary px-7 py-3.5 text-base" href="#odcinki">Sprawdź tematy odcinków</a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-4 flex flex-col justify-between h-full pt-4">
+        <div class="bg-[#F3EFE6]/70 p-8 rounded-[24px] mb-8">
+          <div class="meta-tag text-flight mb-3">MANIFEST PAPIEROWY</div>
+          <p class="font-sans text-base text-ink leading-relaxed italic mb-6">{site.manifest.quote}</p>
+          <div
+            class="flex items-center justify-between pt-4 border-t border-hairline/60 text-xs font-mono text-ink-muted"
+          >
+            <span>{site.cities}</span>
+            <span>{site.season}</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-card-soft p-6 rounded-[20px]">
+            <span class="font-display text-4xl font-extrabold text-ink block leading-none">{episodeCountLabel}</span>
+            <span class="meta-tag text-ink-muted text-[11px] mt-2 block">PIERWSZE ODCINKI NA START</span>
+          </div>
+          <div class="bg-card-soft p-6 rounded-[20px]">
+            <span class="font-display text-4xl font-extrabold text-ink block leading-none">{seasonLabel}</span>
+            <span class="meta-tag text-ink-muted text-[11px] mt-2 block">SEZON {String(latest.data.season).padStart(2, '0')} ROZPOCZĘTY</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Najnowszy odcinek z wbudowanym odtwarzaczem -->
+    <div
+      class="mt-16 bg-card-soft rounded-[28px] p-8 lg:p-12 relative overflow-hidden"
+      id="najnowszy-odcinek"
+      data-player
+      data-duration={latestDurationSeconds}
+    >
+      <audio class="hidden" data-player-audio src={latest.data.audio.url || undefined} preload="metadata"></audio>
+
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-hairline/60">
+        <div>
+          <div class="meta-tag text-flight flex items-center gap-2 mb-2">
+            <span class="inline-block w-2.5 h-2.5 bg-flight rounded-full"></span>
+            ODC. {latestNumber} · NAJNOWSZY · {latest.data.durationMinutes} MIN · PREMIERA
+          </div>
+          <h2 class="font-display-card text-3xl sm:text-4xl text-ink font-bold tracking-tight">
+            <a href={latestHref} class="hover:text-flight-link transition-colors">{latest.data.title}</a>
+          </h2>
+        </div>
+        <button
+          type="button"
+          aria-label={`Odtwórz odcinek ${latestNumber}`}
+          class="flex items-center justify-center gap-3 bg-flight hover:bg-flight-link text-white px-7 py-4 rounded-full transition-all self-start lg:self-center shrink-0"
+          data-player-toggle
+        >
+          <span data-player-icon-play><PlayIcon class="w-5 h-5" /></span>
+          <span data-player-icon-pause class="hidden">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"></path></svg>
+          </span>
+          <span class="text-sm font-semibold tracking-wide" data-player-label-play>ODTWARZAJ ({latest.data.duration})</span>
+          <span class="text-sm font-semibold tracking-wide hidden" data-player-label-pause>WSTRZYMAJ</span>
+        </button>
+      </div>
+
+      <p class="font-sans text-ink-muted text-base lg:text-lg mt-6 leading-relaxed max-w-4xl">
+        {latest.data.description ?? latest.data.summary}
+      </p>
+
+      <div class="mt-8 pt-6 border-t border-hairline/60 flex flex-col gap-3">
+        <div class="flex justify-between items-center text-xs font-mono text-ink-muted">
+          <span data-player-current>00:00</span>
+          <span class="text-ink font-semibold hidden sm:inline">ODCINEK {latestNumber}: PREMIERA SEZONU</span>
+          <span data-player-total>{latest.data.duration}</span>
+        </div>
+        <div
+          class="w-full h-2.5 bg-sunken-deep rounded-full cursor-pointer relative overflow-hidden"
+          role="slider"
+          tabindex="0"
+          aria-label="Pozycja odtwarzania"
+          aria-valuemin="0"
+          aria-valuemax={latestDurationSeconds}
+          aria-valuenow="0"
+          data-player-bar
+        >
+          <div class="h-full bg-flight w-0 rounded-full relative" data-player-progress></div>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-ink-muted mt-2">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" class="hover:text-ink bg-black/5 px-3 py-1 rounded-full data-active:bg-flight-light data-active:text-flight" data-player-speed="1" data-active>1.0x PRĘDKOŚĆ</button>
+            <a class="hover:text-ink bg-black/5 px-3 py-1 rounded-full" href={`${latestHref}#rozdzialy`}>ROZDZIAŁY ({latest.data.chapters.length})</a>
+            {latest.data.audio.url && (
+              <a class="hover:text-ink bg-black/5 px-3 py-1 rounded-full" href={latest.data.audio.url} download>POBIERZ MP3</a>
+            )}
+          </div>
+          {latest.data.notes.url && (
+            <a class="text-flight-link font-medium underline" href={latest.data.notes.url}>Pobierz notatki wizualne (PDF)</a>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FlightPathSeparator />
+
+  <!-- BIBLIOTEKA ODCINKÓW -->
+  <section class="container-site py-16" id="odcinki">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-hairline/50 gap-4">
+      <div>
+        <span class="meta-tag text-ink-muted block mb-2">KATALOG WIEDZY ARCHITEKTONICZNEJ</span>
+        <h2 class="font-display-section text-[44px] md:text-[52px] text-ink">BIBLIOTEKA ODCINKÓW</h2>
+      </div>
+      <p class="font-sans text-ink-muted text-base max-w-md">
+        Przeglądaj odcinki według zagadnień lub posłuchaj pełnych dyskusji wraz z przygotowanymi
+        szkicami i transkrypcją.
+      </p>
+    </div>
+
+    <div aria-label="Filtruj tematy" class="flex flex-wrap gap-2.5 mb-12" id="tematy" role="toolbar" data-tag-filter>
+      <button type="button" class="tag-pill" aria-pressed="true" data-tag="">WSZYSTKIE ({published.length})</button>
+      {allTags.map((tag) => <button type="button" class="tag-pill" aria-pressed="false" data-tag={tag}>{tag}</button>)}
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-episode-grid>
+      {published.map((episode, i) => <EpisodeCard episode={episode} latest={i === 0} />)}
+    </div>
+    <p class="hidden mt-6 font-mono text-sm text-ink-muted" data-empty-note>Brak odcinków z tym tematem — wkrótce.</p>
+
+    <div class="mt-12 text-center">
+      <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-card-soft border border-hairline/60 text-ink-muted text-sm font-mono">
+        <span class="w-2 h-2 rounded-full bg-flight inline-block animate-pulse"></span>
+        <span>
+          {site.cadence}
+          {upcoming && ` · Odcinek ${String(upcoming.data.number).padStart(3, '0')} w przygotowaniu`}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROWADZĄCY -->
+  <section class="bg-sunken border-y border-hairline py-20" id="prowadzacy">
+    <div class="container-site">
+      <div class="mb-14 pb-4 border-b border-hairline flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="meta-tag text-ink-muted block mb-2">KTO ZA TYM STOI</span>
+          <h2 class="font-display-section text-[44px] md:text-[50px] text-ink">PROWADZĄCY</h2>
+        </div>
+        <p class="font-sans text-ink-muted text-base max-w-lg">
+          Dwóch praktyków z wieloletnim doświadczeniem w projektowaniu złożonych systemów dla
+          bankowości, logistyki i chmury.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {
+          site.hosts.map((host) => (
+            <div class="bg-card-soft rounded-[24px] p-8 lg:p-10 flex flex-col sm:flex-row gap-6 items-start">
+              <Avatar name={host.name} initials={host.initials} photo={host.photo} size="lg" />
+              <div class="flex flex-col">
+                <span class="meta-tag text-flight text-xs mb-1.5">{host.role}</span>
+                <h3 class="font-display text-3xl font-bold text-ink uppercase mb-3">{host.name}</h3>
+                <p class="font-sans text-ink-muted text-sm leading-relaxed mb-4">{host.bio}</p>
+                <div class="flex items-center gap-4 text-xs font-mono text-ink">
+                  {host.links.map((link, i) => (
+                    <>
+                      {i > 0 && <span aria-hidden="true">·</span>}
+                      <a class="hover:text-flight-link underline" href={link.href}>
+                        {link.label}
+                      </a>
+                    </>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFEST -->
+  <section class="container-site py-20" id="manifest">
+    <div class="bg-card-soft rounded-[28px] p-8 lg:p-14">
+      <div class="max-w-3xl">
+        <span class="meta-tag text-flight block mb-3">FILOZOFIA PROJEKTOWANIA</span>
+        <h2 class="font-display-section text-[40px] lg:text-[48px] text-ink mb-6">DLACZEGO „PAPER DRIVEN”?</h2>
+        <div class="space-y-4 font-sans text-base lg:text-lg text-ink-muted leading-relaxed">
+          {site.manifest.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 pt-10 border-t border-hairline/60">
+        {
+          site.manifest.pillars.map((pillar, i) => (
+            <div class="p-4">
+              <span class="font-mono text-flight font-bold text-lg block mb-1">{String(i + 1).padStart(2, '0')} /</span>
+              <h4 class="font-display text-2xl font-bold text-ink mb-2">{pillar.title}</h4>
+              <p class="text-xs text-ink-muted font-sans leading-normal">{pillar.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Newsletter variant="dark" />
+</BaseLayout>
+
+<script src="../scripts/player.ts"></script>
+<script>
+  // Filtrowanie odcinków po tagach (bez przeładowania strony).
+  const toolbar = document.querySelector<HTMLElement>('[data-tag-filter]');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-episode-card]'));
+  const emptyNote = document.querySelector<HTMLElement>('[data-empty-note]');
+
+  toolbar?.querySelectorAll<HTMLButtonElement>('[data-tag]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag ?? '';
+      toolbar.querySelectorAll<HTMLButtonElement>('[data-tag]').forEach((b) =>
+        b.setAttribute('aria-pressed', String(b === btn)),
+      );
+      let visible = 0;
+      cards.forEach((card) => {
+        const tags = (card.dataset.tags ?? '').split('|');
+        const show = !tag || tags.includes(tag);
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      emptyNote?.classList.toggle('hidden', visible > 0);
+    });
+  });
+</script>

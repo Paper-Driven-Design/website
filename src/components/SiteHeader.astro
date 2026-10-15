@@ -1,0 +1,76 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+---
+
+<header class="border-b border-hairline bg-paper sticky top-0 z-50">
+  <div class="container-site h-20 flex items-center justify-between">
+    <Logo />
+
+    <nav
+      aria-label="Nawigacja główna"
+      class="hidden md:flex items-center space-x-8 text-[14px] font-semibold text-ink"
+    >
+      {
+        site.nav.map((item) => (
+          <a class="hover:text-flight-link transition-colors" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a class="btn-flight px-6 py-2.5 rounded-full" href="/#newsletter">Subskrybuj</a>
+      <button
+        type="button"
+        class="md:hidden w-10 h-10 inline-flex items-center justify-center rounded-full border border-control text-ink hover:bg-sunken transition-colors"
+        aria-label="Otwórz menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        data-nav-toggle
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" data-icon-open></path>
+          <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" class="hidden" data-icon-close></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-nav"
+    aria-label="Nawigacja mobilna"
+    class="md:hidden hidden border-t border-hairline bg-paper"
+    data-mobile-nav
+  >
+    <div class="container-site py-4 flex flex-col gap-1 text-[15px] font-semibold text-ink">
+      {
+        site.nav.map((item) => (
+          <a class="py-2.5 border-b border-hairline/60 last:border-0 hover:text-flight-link transition-colors" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const nav = document.querySelector<HTMLElement>('[data-mobile-nav]');
+  const iconOpen = toggle?.querySelector('[data-icon-open]');
+  const iconClose = toggle?.querySelector('[data-icon-close]');
+
+  if (toggle && nav) {
+    const setOpen = (open: boolean) => {
+      nav.classList.toggle('hidden', !open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+      iconOpen?.classList.toggle('hidden', open);
+      iconClose?.classList.toggle('hidden', !open);
+    };
+    toggle.addEventListener('click', () => setOpen(nav.classList.contains('hidden')));
+    nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  }
+</script>

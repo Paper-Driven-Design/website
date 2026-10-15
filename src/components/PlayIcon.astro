@@ -1,0 +1,10 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = 'w-4 h-4' } = Astro.props;
+---
+
+<svg class:list={['fill-current shrink-0', className]} viewBox="0 0 24 24" aria-hidden="true">
+  <path d="M8 5v14l11-7z"></path>
+</svg>

@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PlayIcon from './PlayIcon.astro';
+
+interface Props {
+  episode: CollectionEntry<'episodes'>;
+  latest?: boolean;
+}
+
+const { episode, latest = false } = Astro.props;
+const { data } = episode;
+const number = String(data.number).padStart(3, '0');
+const href = `/odcinki/${episode.id}/`;
+const metaLeft = [`ODC. ${number}`, data.badge].filter(Boolean).join(' · ');
+---
+
+<article
+  class="bg-card-soft rounded-[24px] p-8 lg:p-10 flex flex-col justify-between hover:bg-card-hover transition-colors border border-hairline/40"
+  data-episode-card
+  data-tags={data.tags.join('|')}
+>
+  <div>
+    <div
+      class="meta-tag text-ink-muted mb-4 pb-3 border-b border-hairline/50 flex justify-between items-center gap-4"
+    >
+      <span class:list={[latest && 'text-flight font-semibold']}>{metaLeft}</span>
+      <span class="text-right">{data.durationMinutes} MIN · {data.monthLabel}</span>
+    </div>
+    <h3
+      class="font-display text-[30px] font-bold text-ink uppercase leading-tight mb-4 hover:text-flight-link transition-colors"
+    >
+      <a href={href}>{data.title}</a>
+    </h3>
+    <p class="font-sans text-ink-muted text-base leading-relaxed mb-6">{data.summary}</p>
+  </div>
+
+  <div>
+    <div class="flex flex-wrap gap-2 mb-6">
+      {data.tags.map((tag) => <span class="tag-pill text-[10px]">{tag}</span>)}
+    </div>
+    <div class="flex items-center justify-between pt-4 border-t border-hairline/50">
+      <a
+        aria-label={`Posłuchaj odcinka ${number}`}
+        class="btn-flight px-6 py-2.5 text-xs uppercase gap-2 rounded-full"
+        href={`${href}#odtwarzacz`}
+      >
+        <PlayIcon class="w-3.5 h-3.5" />
+        <span>Posłuchaj</span>
+      </a>
+      {
+        data.notes.url && (
+          <a class="text-xs font-mono text-flight-link underline hover:text-ink" href={data.notes.url}>
+            Notatki (PDF)
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>

@@ -1,0 +1,26 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+---
+
+<footer class="bg-dark-bg text-dark-text border-t border-dark-border py-12">
+  <div
+    class="container-site flex flex-col md:flex-row justify-between items-start md:items-center gap-8"
+  >
+    <Logo variant="dark" size="sm" />
+
+    <nav aria-label="Platformy podcastowe" class="flex flex-wrap items-center gap-6 text-sm font-mono text-dark-muted">
+      {
+        site.platforms.map((p) => (
+          <a class="hover:text-dark-text transition-colors" href={p.href}>
+            {p.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="font-mono text-xs text-dark-muted md:text-right">
+      {site.copyright}
+    </div>
+  </div>
+</footer>
