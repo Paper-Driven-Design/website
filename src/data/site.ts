@@ -8,7 +8,7 @@ export const site = {
   title: 'Paper Driven Design — Polski Podcast Architektury i Projektowania Systemów',
   description:
     'Podcast o architekturze oprogramowania, Event Stormingu, modelowaniu domeny i miękkich kompetencjach technicznych liderów. Zrozumienie na papierze, spokój na produkcji.',
-  url: 'https://paperdrivendesign.pl',
+  url: 'https://paperdriven.design',
   locale: 'pl',
   season: 'SEZON 2026',
   cities: 'WARSZAWA / WROCŁAW',

@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://paperdrivendesign.pl',
+  site: 'https://paperdriven.design',
   trailingSlash: 'ignore',
   vite: {
     plugins: [tailwindcss()]
