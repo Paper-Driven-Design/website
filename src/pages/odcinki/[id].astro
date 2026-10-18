@@ -102,8 +102,8 @@ const pageTitle = `${data.title} — Odcinek ${number} | ${site.name}`;
 
         <div class="flex flex-wrap items-center gap-6 mb-10 font-sans text-body-md text-tertiary relative">
           <div class="flex items-center gap-3">
-            <Avatar name={site.hosts[0].name} initials={site.hosts[0].initials} photo={site.hosts[0].photo} size="sm" tone="soft" />
-            <Avatar name={site.hosts[1].name} initials={site.hosts[1].initials} photo={site.hosts[1].photo} size="sm" tone="softer" class="-ml-5" />
+            <Avatar name={site.hosts[0].name} initials={site.hosts[0].initials} size="sm" tone="soft" />
+            <Avatar name={site.hosts[1].name} initials={site.hosts[1].initials} size="sm" tone="softer" class="-ml-5" />
             <div class="flex flex-col ml-1">
               <span class="font-sans text-label-ui text-on-surface">Prowadzący: {hostsLine}</span>
               {data.hostsNote && <span class="font-mono text-[12px] text-tertiary">{data.hostsNote}</span>}
@@ -363,7 +363,7 @@ const pageTitle = `${data.title} — Odcinek ${number} | ${site.name}`;
               {
                 site.hosts.map((host) => (
                   <div class="flex items-center gap-4">
-                    <Avatar name={host.name} initials={host.initials} photo={host.photo} size="md" tone="ink" />
+                    <Avatar name={host.name} initials={host.initials} size="md" tone="ink" />
                     <div class="flex flex-col min-w-0">
                       <span class="font-sans text-label-ui text-on-surface font-bold">{host.name}</span>
                       <span class="font-mono text-[12px] text-tertiary truncate">{host.roleShort}</span>

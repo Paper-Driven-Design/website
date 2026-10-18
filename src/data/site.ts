@@ -44,7 +44,7 @@ export const site = {
       role: 'ARCHITEKT OPROGRAMOWANIA · FACYLITATOR EVENT STORMING',
       roleShort: 'Lead Systems Architect · Domain-Driven Design practitioner',
       bio: 'Specjalizuje się w rozplątywaniu złożonych domen biznesowych przy użyciu warsztatów Event Storming i Context Mapping. Propagator pracy na papierze przed napisaniem pierwszej linijki kodu produkcyjnego.',
-      photo: '', // np. '/images/hosts/kamil.jpg'
+      photo: '/images/hosts/kamil.webp',
       links: [
         { label: 'LinkedIn', href: '#' },
         { label: 'GitHub', href: '#' },
@@ -55,14 +55,14 @@ export const site = {
       id: 'artur',
       name: 'Artur Wojnar',
       initials: 'AW',
-      role: 'TECH LEAD · PRACTITIONER DOMAIN-DRIVEN DESIGN',
-      roleShort: 'Staff Product Designer & Systems Facilitator',
-      bio: 'Praktyk wdrażania Modularnych Monolitów i architektur sterowanych zdarzeniami (EDA). Skupia się na komunikacji inżynierów z interesariuszami biznesowymi oraz higienie decyzji architektonicznych (ADR).',
-      photo: '',
+      role: 'Solutions Architect · Consultant · Speaker',
+      roleShort: 'Solutions Architect · Consultant · Speaker',
+      bio: 'Pragmatyk projektowania architektury. Jego ulubiona domena to healthcare. Fan modernizacji rozpadających się aplikacji i entuzjasta współpracy z klientem. Uwielbia wizualne metody warsztatowe łączące biznes i tech. Walczy dzielnie z galopującą entropią za pomocą DDD, zdarzeń i event sourcingu.',
+      photo: '/images/hosts/artur.webp',
       links: [
-        { label: 'LinkedIn', href: '#' },
-        { label: 'Blog', href: '#' },
-        { label: 'Twitter/X', href: '#' },
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/artur-wojnar-a19349a6' },
+        { label: 'Blog', href: 'https://www.planthencode.com/' },
+        { label: 'Sessionize', href: 'https://sessionize.com/arturwojnar/' },
       ],
     },
   ],
@@ -72,7 +72,7 @@ export const site = {
       '„Kod jest najdroższym miejscem na popełnianie błędów koncepcyjnych. Złożoność rozstrzyga się w rozmowie i na wielkich arkuszach papieru.”',
     paragraphs: [
       'Papier jest najbardziej bezlitosnym, a zarazem najtańszym środowiskiem do testowania hipotez architektonicznych. Jeśli nie potrafisz wytłumaczyć przepływu danych za pomocą flamastra na rolce papieru pakowego, nie pomoże Ci żaden framework, Kubernetes ani architektura rozproszona.',
-      'W podcastzie skupiamy się na rzemiośle myślenia: zadawaniu właściwych pytań, wyznaczaniu granic odpowiedzialności i facylitacji dialogu pomiędzy programistami a ludźmi biznesu.',
+      'W podkaście skupiamy się na rzemiośle myślenia: zadawaniu właściwych pytań, wyznaczaniu granic odpowiedzialności i facylitacji dialogu pomiędzy programistami a ludźmi biznesu.',
     ],
     pillars: [
       {
