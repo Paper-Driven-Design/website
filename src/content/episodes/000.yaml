@@ -6,8 +6,8 @@ status: published
 date: 2026-10-04
 dateLabel: "4 października 2026"
 monthLabel: "PAŹDZIERNIK 2026"
-duration: "48:05" # długość testowego audio — podmień po wgraniu właściwego MP3
-durationMinutes: 48
+duration: "08:13"
+durationMinutes: 8
 
 summary: >-
   Tu Artur Wojnar i Kamil Kiełbasa! Witamy w Paper-Driven Design! :)
@@ -19,5 +19,9 @@ tags:
   - START
 
 audio:
-  url: "/audio/pdd-000-test.mp3" # plik testowy (scripts/make-test-audio.sh) — podmień na właściwy MP3
-  size: "9 MB"
+  url: "https://d3057vo2xyrx9j.cloudfront.net/episodes/000-poznajmy-sie.mp3"
+  bytes: 7890929
+  size: "8 MB"
+  quality: "128 kbps"
+
+image: "https://d3057vo2xyrx9j.cloudfront.net/images/episodes/000-poznajmy-sie-3000x3000.jpg"

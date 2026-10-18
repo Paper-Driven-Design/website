@@ -10,6 +10,8 @@ interface Props {
   /** Ładuje font ikon Material Symbols (używany tylko na stronie odcinka). */
   icons?: boolean;
   ogType?: 'website' | 'article';
+  /** Pełny URL grafiki og:image (domyślnie okładka podcastu). */
+  image?: string;
 }
 
 const {
@@ -17,6 +19,7 @@ const {
   description = site.description,
   icons = false,
   ogType = 'website',
+  image = site.podcast.cover,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, site.url).toString();
@@ -31,7 +34,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={site.name} href={site.podcast.feedPath} />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.name} />
@@ -39,7 +42,9 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={image} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={image} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

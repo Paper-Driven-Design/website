@@ -54,11 +54,14 @@ const episodes = defineCollection({
     hostsNote: z.string().optional(),
     audio: z
       .object({
-        url: z.string().optional(),
-        size: z.string().optional(), // "120 MB"
-        quality: z.string().optional(), // "320kbps High Fidelity"
+        url: z.string().optional(), // pełny URL (CloudFront), np. https://d3057vo2xyrx9j.cloudfront.net/episodes/001-....mp3
+        bytes: z.number().optional(), // rozmiar pliku w bajtach — <enclosure length> w feedzie (wypisuje upload-episode.sh)
+        size: z.string().optional(), // etykieta na stronie, np. "31 MB"
+        quality: z.string().optional(), // np. "128 kbps"
       })
       .default({}),
+    image: z.string().optional(), // okładka odcinka 3000x3000 (pełny URL) — feed + og:image
+    explicit: z.boolean().default(false),
     notes: z
       .object({
         url: z.string().optional(),

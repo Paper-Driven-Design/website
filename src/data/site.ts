@@ -20,6 +20,24 @@ export const site = {
   newsletterAction: '',
   newsletterSubscribers: '3 400',
 
+  /** Dane kanału podcastowego (feed.xml dla Spotify / Apple Podcasts). */
+  podcast: {
+    /** Kanoniczny adres feedu — ten zgłaszasz do Spotify i Apple. Nie zmieniaj po zgłoszeniu. */
+    feedPath: '/feed.xml',
+    /** Okładka 3000x3000 JPG (wymóg Apple: 1400–3000 px, RGB, JPG/PNG). */
+    cover: 'https://d3057vo2xyrx9j.cloudfront.net/images/pdd-cover-3000x3000.jpg',
+    author: 'Kamil Kiełbasa & Artur Wojnar',
+    /** Właściciel feedu: Apple i Spotify wysyłają na ten adres kod weryfikacyjny i powiadomienia.
+     *  Adres jest publiczny w feedzie. Pusty string = tag <itunes:owner> pominięty (Apple i Spotify go wymagają). */
+    ownerName: 'Paper Driven Design',
+    ownerEmail: '',
+    /** Kategorie Apple Podcasts: https://podcasters.apple.com/support/1691-apple-podcasts-categories */
+    category: 'Technology',
+    explicit: false,
+    type: 'episodic' as const,
+    language: 'pl',
+  },
+
   nav: [
     { label: 'Odcinki', href: '/#odcinki' },
     { label: 'Tematy', href: '/#tematy' },
@@ -32,7 +50,7 @@ export const site = {
     { label: 'Spotify', href: '#' },
     { label: 'Apple Podcasts', href: '#' },
     { label: 'YouTube', href: '#' },
-    { label: 'RSS', href: '/rss.xml' },
+    { label: 'RSS', href: '/feed.xml' },
     { label: 'LinkedIn', href: '#' },
   ],
 

@@ -53,7 +53,7 @@ const resourceAccent = {
 const pageTitle = `${data.title} — Odcinek ${number} | ${site.name}`;
 ---
 
-<BaseLayout title={pageTitle} description={data.summary} icons ogType="article">
+<BaseLayout title={pageTitle} description={data.summary} icons ogType="article" image={data.image ?? site.podcast.cover}>
   <div class="flex flex-col w-full">
     <!-- Okruszki + skróty do platform -->
     <section class="container-site w-full pt-8 pb-4">
