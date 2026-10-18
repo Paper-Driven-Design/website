@@ -71,11 +71,17 @@ const pageTitle = `${data.title} — Odcinek ${number} | ${site.name}`;
         <div class="flex flex-wrap items-center gap-2">
           <span class="font-mono text-[11px] tracking-mono text-tertiary uppercase mr-2 hidden sm:inline">Słuchaj na:</span>
           {
-            platforms.map((p) => (
-              <a class="px-3 py-1 rounded-full bg-surface-container text-on-surface font-mono text-[11px] hover:bg-surface-container-high transition-colors" href={p.href}>
-                {p.label}
-              </a>
-            ))
+            platforms.map((p) =>
+              'comingSoon' in p && p.comingSoon ? (
+                <span class="px-3 py-1 rounded-full bg-surface-container-low text-tertiary font-mono text-[11px] cursor-default" title="Już wkrótce">
+                  {p.label} · wkrótce
+                </span>
+              ) : (
+                <a class="px-3 py-1 rounded-full bg-surface-container text-on-surface font-mono text-[11px] hover:bg-surface-container-high transition-colors" href={p.href}>
+                  {p.label}
+                </a>
+              ),
+            )
           }
         </div>
       </div>
@@ -217,6 +223,14 @@ const pageTitle = `${data.title} — Odcinek ${number} | ${site.name}`;
                     <a class="pill-action" href={data.audio.url} download>
                       <span class="material-symbols-outlined text-[18px]">download</span>
                       <span>Pobierz MP3{data.audio.size && ` (${data.audio.size})`}</span>
+                    </a>
+                  )
+                }
+                {
+                  data.youtube && (
+                    <a class="pill-action" href={data.youtube} target="_blank" rel="noopener noreferrer">
+                      <span class="material-symbols-outlined text-[18px]">smart_display</span>
+                      <span>Obejrzyj na YouTube</span>
                     </a>
                   )
                 }

@@ -24,6 +24,32 @@ export const site = {
   podcast: {
     /** Kanoniczny adres feedu — ten zgłaszasz do Spotify i Apple. Nie zmieniaj po zgłoszeniu. */
     feedPath: '/feed.xml',
+    /** <itunes:subtitle> — jedna linia pod nazwą programu w Apple. */
+    subtitle: 'Polski podcast o architekturze i projektowaniu systemów',
+    /** <description> i <itunes:summary> kanału (Spotify i Apple pokazują to jako opis programu; limit 4000 znaków).
+     *  Pełny tekst i warianty: paper-driven-design-profile/apple-podcasts-i-spotify/pdd-opis-podcastu.txt */
+    summary: `Paper Driven Design to polski podcast o architekturze oprogramowania i projektowaniu systemów. Prowadzą go Kamil Kiełbasa i Artur Wojnar, architekci z 15-letnim stażem każdy, którzy na co dzień projektują systemy, modernizują rozpadające się aplikacje i facylitują warsztaty łączące biznes z inżynierami.
+
+Wychodzimy z prostego założenia: kod jest najdroższym miejscem na popełnianie błędów koncepcyjnych. Złożoność rozstrzyga się w rozmowie i na papierze, zanim powstanie pierwszy moduł. Dlatego rozmawiamy o tym, jak myśleć o systemie, a nie tylko jak go napisać.
+
+O czym rozmawiamy:
+• Domain-Driven Design w praktyce: bounded contexty, język wszechobecny, mapy kontekstów
+• Event Storming, Domain Storytelling, Example Mapping, mapy Wardleya i inne metody warsztatowe
+• Decyzje architektoniczne i ich koszt: modularne monolity, architektury sterowane zdarzeniami, event sourcing, chmura
+• Złożoność systemów i walka z entropią w projektach, które żyją latami
+• AI i LLM-y w pracy architekta: co naprawdę zmieniają, a co jest tylko kolejnym kompilatorem Fortrana
+• Umiejętności miękkie: facylitacja, komunikacja z biznesem, prowadzenie zespołów przez trudne zmiany
+• Nasze własne błędy z produkcji, żebyś nie musiał ich powtarzać
+
+Dla kogo: dla programistów, tech leadów i architektów, którzy chcą projektować systemy świadomie, oraz dla osób z biznesu, które chcą zrozumieć, jak rozmawiać z inżynierami o produkcie.
+
+Format: rozmowa dwóch praktyków, 30-60 minut, bez sponsorowanych wstawek. Co jakiś czas odcinki warsztatowe, w których modelujemy na żywo.
+
+Nowe odcinki co dwa tygodnie. Notatki, materiały i transkrypcje do każdego odcinka: https://paperdriven.design
+
+Prowadzący:
+Kamil Kiełbasa — architekt oprogramowania i tech lead, Microsoft MVP, certyfikowany architekt AWS i Azure. Pisze na bd90.pl.
+Artur Wojnar — solutions architect, konsultant i prelegent. Pragmatyk projektowania, fan modernizacji i wizualnych metod warsztatowych. Pisze na planthencode.com.`,
     /** Okładka 3000x3000 JPG (wymóg Apple: 1400–3000 px, RGB, JPG/PNG). */
     cover: 'https://d3057vo2xyrx9j.cloudfront.net/images/pdd-cover-3000x3000.jpg',
     author: 'Kamil Kiełbasa & Artur Wojnar',
@@ -48,8 +74,8 @@ export const site = {
 
   platforms: [
     { label: 'Spotify', href: '#' },
-    { label: 'Apple Podcasts', href: '#' },
-    { label: 'YouTube', href: '#' },
+    { label: 'Apple Podcasts', href: '#', comingSoon: true }, // po zatwierdzeniu feedu wpisz link i usuń comingSoon
+    { label: 'YouTube', href: 'https://www.youtube.com/@PaperDrivenDesign' },
     { label: 'RSS', href: '/feed.xml' },
     { label: 'LinkedIn', href: '#' },
   ],

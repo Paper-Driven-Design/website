@@ -43,7 +43,9 @@ export async function GET(context: APIContext) {
         data.chapters.length
           ? `<p>Rozdziały:</p><ul>${data.chapters.map((c) => `<li>${esc(c.time)} — ${esc(c.title)}</li>`).join('')}</ul>`
           : ''
-      }<p>Notatki i transkrypcja: <a href="${link}">${link}</a></p>`;
+      }<p>Notatki i transkrypcja: <a href="${link}">${link}</a></p>${
+        data.youtube ? `<p>Wersja wideo: <a href="${esc(data.youtube)}">${esc(data.youtube)}</a></p>` : ''
+      }`;
 
       return `    <item>
       <title>${esc(feedTitle)}</title>
@@ -85,7 +87,7 @@ ${data.tags.map((tag) => `      <category>${esc(tag)}</category>`).join('\n')}
     <title>${esc(site.name)}</title>
     <link>${base}/</link>
     <atom:link href="${feedUrl}" rel="self" type="application/rss+xml"/>
-    <description>${cdata(site.description)}</description>
+    <description>${cdata(podcast.summary)}</description>
     <language>${podcast.language}</language>
     <copyright>${esc(site.copyright)}</copyright>
     <lastBuildDate>${lastBuild.toUTCString()}</lastBuildDate>
@@ -96,8 +98,8 @@ ${data.tags.map((tag) => `      <category>${esc(tag)}</category>`).join('\n')}
     </image>
     <itunes:image href="${esc(podcast.cover)}"/>
     <itunes:author>${esc(podcast.author)}</itunes:author>
-    <itunes:subtitle>${esc(site.tagline)}</itunes:subtitle>
-    <itunes:summary>${esc(site.description)}</itunes:summary>
+    <itunes:subtitle>${esc(podcast.subtitle)}</itunes:subtitle>
+    <itunes:summary>${esc(podcast.summary)}</itunes:summary>
 ${owner}    <itunes:category text="${esc(podcast.category)}"/>
     <itunes:explicit>${podcast.explicit ? 'true' : 'false'}</itunes:explicit>
     <itunes:type>${podcast.type}</itunes:type>

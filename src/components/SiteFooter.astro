@@ -11,11 +11,17 @@ import { site } from '../data/site';
 
     <nav aria-label="Platformy podcastowe" class="flex flex-wrap items-center gap-6 text-sm font-mono text-dark-muted">
       {
-        site.platforms.map((p) => (
-          <a class="hover:text-dark-text transition-colors" href={p.href}>
-            {p.label}
-          </a>
-        ))
+        site.platforms.map((p) =>
+          'comingSoon' in p && p.comingSoon ? (
+            <span class="text-dark-muted/60 cursor-default" title="Już wkrótce">
+              {p.label} · wkrótce
+            </span>
+          ) : (
+            <a class="hover:text-dark-text transition-colors" href={p.href}>
+              {p.label}
+            </a>
+          ),
+        )
       }
     </nav>
 
