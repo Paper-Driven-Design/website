@@ -15,9 +15,9 @@ export const site = {
   cadence: 'Nowe odcinki co dwa tygodnie',
   copyright: '© 2026 Paper Driven Design. Kamil Kiełbasa & Artur Wojnar. Wszystkie prawa zastrzeżone.',
 
-  /** Formularz newslettera: wstaw URL dostawcy (Buttondown, Mailchimp, ConvertKit…).
+  /** Formularz newslettera: endpoint zapisu do Brevo (projekt Vercel w katalogu api/).
    *  Pusty string = formularz działa w trybie demo (bez wysyłki). */
-  newsletterAction: '',
+  newsletterAction: 'https://api.paperdriven.design/subscribe',
   newsletterSubscribers: '3 400',
 
   /** Dane kanału podcastowego (feed.xml dla Spotify / Apple Podcasts). */

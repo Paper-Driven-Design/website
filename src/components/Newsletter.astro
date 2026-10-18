@@ -134,4 +134,32 @@ const action = site.newsletterAction;
       form.reset();
     });
   });
+
+  // Zapis do newslettera: POST { email } do endpointu z newsletterAction.
+  document.querySelectorAll<HTMLFormElement>('[data-newsletter-form]:not([data-demo])').forEach((form) => {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const note = form.parentElement?.querySelector('[data-newsletter-note]');
+      const input = form.querySelector<HTMLInputElement>('input[type="email"]');
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const email = input?.value.trim() ?? '';
+
+      if (button) button.disabled = true;
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (note) note.textContent = `Dziękujemy! ${email} jest już na liście.`;
+        form.reset();
+      } catch (error) {
+        console.error('Newsletter subscription failed:', error);
+        if (note) note.textContent = 'Nie udało się zapisać. Spróbuj ponownie za chwilę.';
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+  });
 </script>
