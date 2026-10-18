@@ -1,0 +1,23 @@
+number: 0
+season: 1
+title: "POZNAJMY SIĘ!"
+shortTitle: "PDD #000 — Poznajmy się!"
+status: published
+date: 2026-10-04
+dateLabel: "4 października 2026"
+monthLabel: "PAŹDZIERNIK 2026"
+duration: "48:05" # długość testowego audio — podmień po wgraniu właściwego MP3
+durationMinutes: 48
+
+summary: >-
+  Tu Artur Wojnar i Kamil Kiełbasa! Witamy w Paper-Driven Design! :)
+
+lead: >-
+  Tu Artur Wojnar i Kamil Kiełbasa! Witamy w Paper-Driven Design! :)
+
+tags:
+  - START
+
+audio:
+  url: "/audio/pdd-000-test.mp3" # plik testowy (scripts/make-test-audio.sh) — podmień na właściwy MP3
+  size: "9 MB"

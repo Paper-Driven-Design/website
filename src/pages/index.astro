@@ -135,7 +135,9 @@ const episodeCountLabel = String(published.length).padStart(2, '0');
         <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-ink-muted mt-2">
           <div class="flex flex-wrap gap-2">
             <button type="button" class="hover:text-ink bg-black/5 px-3 py-1 rounded-full data-active:bg-flight-light data-active:text-flight" data-player-speed="1" data-active>1.0x PRĘDKOŚĆ</button>
-            <a class="hover:text-ink bg-black/5 px-3 py-1 rounded-full" href={`${latestHref}#rozdzialy`}>ROZDZIAŁY ({latest.data.chapters.length})</a>
+            {latest.data.chapters.length > 0 && (
+              <a class="hover:text-ink bg-black/5 px-3 py-1 rounded-full" href={`${latestHref}#rozdzialy`}>ROZDZIAŁY ({latest.data.chapters.length})</a>
+            )}
             {latest.data.audio.url && (
               <a class="hover:text-ink bg-black/5 px-3 py-1 rounded-full" href={latest.data.audio.url} download>POBIERZ MP3</a>
             )}

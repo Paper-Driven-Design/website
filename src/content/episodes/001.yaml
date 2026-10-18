@@ -1,107 +1,29 @@
 number: 1
 season: 1
-title: "DLACZEGO KOD JEST NAJDROŻSZYM MIEJSCEM NA BŁĄD? MANIFEST PAPIERU"
-shortTitle: "PDD #001 — Manifest Papieru"
+title: "CZY KOD TO JUŻ COMMODITY?"
+shortTitle: "PDD #001 — Czy kod to już commodity?"
 status: published
-badge: "PILOTAŻOWY"
-date: 2026-09-20
-dateLabel: "20 września 2026"
-monthLabel: "WRZESIEŃ 2026"
-duration: "48:05"
-durationMinutes: 48
+badge: "NAJNOWSZY"
+date: 2026-10-18
+dateLabel: "18 października 2026"
+monthLabel: "PAŹDZIERNIK 2026"
+duration: "52:14" # długość testowego audio — podmień po wgraniu właściwego MP3
+durationMinutes: 52
 
 summary: >-
-  Dlaczego zaczynanie projektu od implementacji i frameworków generuje
-  gigantyczny koszt koncepcyjny. Rola wspólnego języka i modelowania na papierze.
+  Zastanówmy się, czy doba AI zmienia dużo w podejściu do wytwarzania
+  oprogramowania i postrzegania samego kodu. Przyjrzymy się kontekstowi
+  historycznemu, bo kto nie zna historii, skazany jest na jej ponowne przeżycie.
 
 lead: >-
-  O fizycznym szkicowaniu systemów, kosztach refaktoringu w chmurze i dlaczego
-  ołówek 2B bije na głowę Confluence. W odcinku pilotażowym opowiadamy, skąd
-  wziął się pomysł na podcast i co dokładnie rozumiemy przez „projektowanie
-  sterowane papierem”.
-
-description: >-
-  Kamil i Artur przechodzą przez trzy prawdziwe projekty, w których pierwsze
-  tygodnie spędzone przy klawiaturze zamiast przy tablicy kosztowały zespoły
-  miesiące refaktoringu. Rozmawiamy o wspólnym języku, o tym, dlaczego diagram
-  narysowany flamastrem jest tańszy od każdej linii kodu, i jak zacząć pracę na
-  papierze w zespole, który „nie ma na to czasu”.
+  Zastanówmy się, czy doba AI zmienia dużo w podejściu do wytwarzania
+  oprogramowania i postrzegania samego kodu. Przyjrzymy się kontekstowi
+  historycznemu, bo kto nie zna historii, skazany jest na jej ponowne przeżycie.
 
 tags:
-  - DOMAIN-DRIVEN DESIGN
-  - MODELOWANIE
-  - START
-topics:
-  - MANIFEST
-  - DOMAIN-DRIVEN-DESIGN
-  - MODELOWANIE
-  - KOSZT-ZMIANY
-
-hostsNote: "Odcinek pilotażowy — skąd wziął się Paper Driven Design"
+  - AI
+  - HISTORIA
 
 audio:
   url: "/audio/pdd-001-test.mp3" # plik testowy (scripts/make-test-audio.sh) — podmień na właściwy MP3
-  size: "8 MB"
-  quality: "320kbps High Fidelity"
-
-notes:
-  url: "#"
-  label: "Notatki wizualne (PDF 8 str.)"
-
-chapters:
-  - { time: "00:00", seconds: 0, title: "Kim jesteśmy i po co ten podcast" }
-  - { time: "06:40", seconds: 400, title: "Najdroższe miejsce na błąd: trzy historie z produkcji" }
-  - { time: "17:25", seconds: 1045, title: "Wspólny język zanim powstanie pierwszy moduł" }
-  - { time: "29:10", seconds: 1750, title: "Ołówek 2B kontra Confluence" }
-  - { time: "40:30", seconds: 2430, title: "Jak zacząć pracę na papierze w zespole bez czasu" }
-
-takeaways:
-  - title: "Koszt błędu rośnie wykładniczo z każdym etapem"
-    text: "Założenie obalone na papierze kosztuje godzinę. To samo założenie obalone po wdrożeniu kosztuje kwartał i zaufanie biznesu."
-  - title: "Wspólny język to artefakt, nie slogan"
-    text: "Jak zbudować słownik domeny, do którego naprawdę wracają programiści i ludzie biznesu."
-  - title: "Rysunek jest tańszy od każdej linii kodu"
-    text: "Dlaczego szkic na rolce papieru pakowego wygrywa z dokumentem w Confluence i diagramem w narzędziu do modelowania."
-  - title: "Pierwszy krok w zespole, który „nie ma czasu”"
-    text: "Protokół 90-minutowej sesji, którą da się przeprowadzić w każdym sprincie bez zgody zarządu."
-
-resources:
-  - kind: "Szkic z odcinka"
-    title: "Mapa kosztu zmiany: od pomysłu do produkcji"
-    text: "Jednostronicowy schemat omawiany w pierwszej części rozmowy, do wydruku i powieszenia obok tablicy."
-    cta: "Pobierz PDF (1 MB)"
-    href: "#"
-    icon: draw
-    ctaIcon: download
-    accent: primary
-  - kind: "Literatura odcinka"
-    title: "Rekomendowane lektury"
-    list:
-      - "„Domain-Driven Design” — Eric Evans"
-      - "„The Design of Everyday Things” — Don Norman"
-      - "„Learning Domain-Driven Design” — Vlad Khononov"
-    cta: "Kup lub sprawdź notatki"
-    href: "#"
-    icon: menu_book
-    ctaIcon: open_in_new
-    accent: neutral
-
-transcript:
-  range: "[06:40 – 08:10]"
-  wordCount: "7 600"
-  excerpt:
-    - speaker: "Artur Wojnar"
-      initials: "AW"
-      time: "06:40"
-      html: >-
-        „Kamil, opowiedz tę historię z systemem rozliczeń. Bo to jest chyba najlepszy
-        przykład tego, co rozumiemy przez <em>najdroższe miejsce na błąd</em>.”
-    - speaker: "Kamil Kiełbasa"
-      initials: "KK"
-      time: "07:05"
-      html: >-
-        „Zespół ruszył od razu od kodu, bo „wiadomo, co trzeba zrobić”. Po czterech
-        miesiącach okazało się, że dwa działy używały słowa <em>«rozliczenie»</em> na
-        zupełnie różne rzeczy. <strong>Jedna godzina z flamastrem i rolką papieru
-        wykryłaby to pierwszego dnia.</strong> Zamiast tego mieliśmy kwartał refaktoringu.”
-  full: []
+  size: "9 MB"
