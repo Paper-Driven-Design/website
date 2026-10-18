@@ -49,7 +49,7 @@ export const site = {
   platforms: [
     { label: 'Spotify', href: '#' },
     { label: 'Apple Podcasts', href: '#', comingSoon: true }, // po zatwierdzeniu feedu wpisz link i usuń comingSoon
-    { label: 'YouTube', href: '#' },
+    { label: 'YouTube', href: 'https://www.youtube.com/@PaperDrivenDesign' },
     { label: 'RSS', href: '/feed.xml' },
     { label: 'LinkedIn', href: '#' },
   ],

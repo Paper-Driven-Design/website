@@ -43,7 +43,9 @@ export async function GET(context: APIContext) {
         data.chapters.length
           ? `<p>Rozdziały:</p><ul>${data.chapters.map((c) => `<li>${esc(c.time)} — ${esc(c.title)}</li>`).join('')}</ul>`
           : ''
-      }<p>Notatki i transkrypcja: <a href="${link}">${link}</a></p>`;
+      }<p>Notatki i transkrypcja: <a href="${link}">${link}</a></p>${
+        data.youtube ? `<p>Wersja wideo: <a href="${esc(data.youtube)}">${esc(data.youtube)}</a></p>` : ''
+      }`;
 
       return `    <item>
       <title>${esc(feedTitle)}</title>

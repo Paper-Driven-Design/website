@@ -61,6 +61,7 @@ const episodes = defineCollection({
       })
       .default({}),
     image: z.string().optional(), // okładka odcinka 3000x3000 (pełny URL) — feed + og:image
+    youtube: z.string().url().optional(), // wersja wideo odcinka, np. https://youtu.be/...
     explicit: z.boolean().default(false),
     notes: z
       .object({
