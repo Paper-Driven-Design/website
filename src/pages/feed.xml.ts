@@ -87,7 +87,7 @@ ${data.tags.map((tag) => `      <category>${esc(tag)}</category>`).join('\n')}
     <title>${esc(site.name)}</title>
     <link>${base}/</link>
     <atom:link href="${feedUrl}" rel="self" type="application/rss+xml"/>
-    <description>${cdata(site.description)}</description>
+    <description>${cdata(podcast.summary)}</description>
     <language>${podcast.language}</language>
     <copyright>${esc(site.copyright)}</copyright>
     <lastBuildDate>${lastBuild.toUTCString()}</lastBuildDate>
@@ -98,8 +98,8 @@ ${data.tags.map((tag) => `      <category>${esc(tag)}</category>`).join('\n')}
     </image>
     <itunes:image href="${esc(podcast.cover)}"/>
     <itunes:author>${esc(podcast.author)}</itunes:author>
-    <itunes:subtitle>${esc(site.tagline)}</itunes:subtitle>
-    <itunes:summary>${esc(site.description)}</itunes:summary>
+    <itunes:subtitle>${esc(podcast.subtitle)}</itunes:subtitle>
+    <itunes:summary>${esc(podcast.summary)}</itunes:summary>
 ${owner}    <itunes:category text="${esc(podcast.category)}"/>
     <itunes:explicit>${podcast.explicit ? 'true' : 'false'}</itunes:explicit>
     <itunes:type>${podcast.type}</itunes:type>
