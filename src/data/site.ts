@@ -18,7 +18,6 @@ export const site = {
   /** Formularz newslettera: endpoint zapisu do Brevo (projekt Vercel w katalogu api/).
    *  Pusty string = formularz działa w trybie demo (bez wysyłki). */
   newsletterAction: 'https://api.paperdriven.design/subscribe',
-  newsletterSubscribers: '3 400',
 
   /** Dane kanału podcastowego (feed.xml dla Spotify / Apple Podcasts). */
   podcast: {

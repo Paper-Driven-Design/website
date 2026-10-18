@@ -61,11 +61,6 @@ const action = site.newsletterAction;
             role="status"
             aria-live="polite"
           />
-
-          <p class="font-mono text-xs text-control mt-4" data-newsletter-note>
-            Dołączyło już ponad {site.newsletterSubscribers} architektów i tech leadów. Wypisanie
-            jednym kliknięciem.
-          </p>
         </div>
       </div>
     </section>
@@ -125,10 +120,6 @@ const action = site.newsletterAction;
             role="status"
             aria-live="polite"
           />
-
-          <span class="font-mono text-[11px] text-tertiary" data-newsletter-note>
-            Ponad {site.newsletterSubscribers} subskrybujących architektów i inżynierów w Polsce.
-          </span>
         </div>
       </div>
     </section>
@@ -140,10 +131,11 @@ const action = site.newsletterAction;
   document.querySelectorAll<HTMLFormElement>('[data-newsletter-form][data-demo]').forEach((form) => {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      const note = form.parentElement?.querySelector('[data-newsletter-note]');
+      const status = form.parentElement?.querySelector<HTMLElement>('[data-newsletter-status]');
       const input = form.querySelector<HTMLInputElement>('input[type="email"]');
-      if (note) {
-        note.textContent = `Dziękujemy! ${input?.value ?? ''} — potwierdzenie zapisu wyślemy, gdy lista ruszy.`;
+      if (status) {
+        status.dataset.state = 'success';
+        status.textContent = `Dziękujemy! ${input?.value ?? ''} — potwierdzenie zapisu wyślemy, gdy lista ruszy.`;
       }
       form.reset();
     });
