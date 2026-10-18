@@ -60,13 +60,13 @@ export const site = {
       name: 'Kamil Kiełbasa',
       initials: 'KK',
       role: 'ARCHITEKT OPROGRAMOWANIA · FACYLITATOR EVENT STORMING',
-      roleShort: 'Lead Systems Architect · Domain-Driven Design practitioner',
-      bio: 'Specjalizuje się w rozplątywaniu złożonych domen biznesowych przy użyciu warsztatów Event Storming i Context Mapping. Propagator pracy na papierze przed napisaniem pierwszej linijki kodu produkcyjnego.',
+      roleShort: 'Software Architect · Tech Lead · Microsoft MVP',
+      bio: 'Architekt oprogramowania i tech lead z 15-letnim stażem, Microsoft MVP, certyfikowany architekt AWS i Azure. Projektuje skalowalne systemy w .NET i chmurze. Domain-Driven Design i Event Storming stosuje na co dzień i uczy ich zespoły inżynierskie. Odpowiadał za architekturę produktów dla milionów użytkowników. Trener i prelegent, autor bloga bd90.pl i newslettera „The Architect’s Edge”. Gdy odkłada klawiaturę, sięga po gitarę.',
       photo: '/images/hosts/kamil.webp',
       links: [
-        { label: 'LinkedIn', href: '#' },
-        { label: 'GitHub', href: '#' },
-        { label: 'Substack', href: '#' },
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/bd-90/' },
+        { label: 'Blog', href: 'https://bd90.pl/' },
+        { label: 'Sessionize', href: 'https://sessionize.com/bd90/' },
       ],
     },
     {
