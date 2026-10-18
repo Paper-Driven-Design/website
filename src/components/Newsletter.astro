@@ -55,6 +55,13 @@ const action = site.newsletterAction;
               Zapisz się do listy
             </button>
           </form>
+          <p
+            class="hidden data-[state]:block mt-4 max-w-xl px-6 py-3.5 rounded-2xl font-sans text-sm font-semibold data-[state=success]:bg-dark-accent data-[state=success]:text-dark-accent-text data-[state=error]:bg-red-500/15 data-[state=error]:text-red-300"
+            data-newsletter-status
+            role="status"
+            aria-live="polite"
+          />
+
           <p class="font-mono text-xs text-control mt-4" data-newsletter-note>
             Dołączyło już ponad {site.newsletterSubscribers} architektów i tech leadów. Wypisanie
             jednym kliknięciem.
@@ -112,6 +119,13 @@ const action = site.newsletterAction;
               Zapisz się bezpłatnie
             </button>
           </form>
+          <p
+            class="hidden data-[state]:block px-5 py-3.5 rounded-2xl font-sans text-body-md font-semibold data-[state=success]:bg-primary-fixed data-[state=success]:text-on-primary-fixed data-[state=error]:bg-red-100 data-[state=error]:text-red-800"
+            data-newsletter-status
+            role="status"
+            aria-live="polite"
+          />
+
           <span class="font-mono text-[11px] text-tertiary" data-newsletter-note>
             Ponad {site.newsletterSubscribers} subskrybujących architektów i inżynierów w Polsce.
           </span>
@@ -139,10 +153,15 @@ const action = site.newsletterAction;
   document.querySelectorAll<HTMLFormElement>('[data-newsletter-form]:not([data-demo])').forEach((form) => {
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const note = form.parentElement?.querySelector('[data-newsletter-note]');
+      const status = form.parentElement?.querySelector<HTMLElement>('[data-newsletter-status]');
       const input = form.querySelector<HTMLInputElement>('input[type="email"]');
       const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
       const email = input?.value.trim() ?? '';
+      const showStatus = (state: 'success' | 'error', message: string) => {
+        if (!status) return;
+        status.dataset.state = state;
+        status.textContent = message;
+      };
 
       if (button) button.disabled = true;
       try {
@@ -152,11 +171,11 @@ const action = site.newsletterAction;
           body: JSON.stringify({ email }),
         });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        if (note) note.textContent = `Dziękujemy! ${email} jest już na liście.`;
+        showStatus('success', `Dziękujemy! Zapisaliśmy ${email} na listę Paper Notes ❤️ 🎉`);
         form.reset();
       } catch (error) {
         console.error('Newsletter subscription failed:', error);
-        if (note) note.textContent = 'Nie udało się zapisać. Spróbuj ponownie za chwilę.';
+        showStatus('error', 'Nie udało się zapisać. Spróbuj ponownie za chwilę.');
       } finally {
         if (button) button.disabled = false;
       }
