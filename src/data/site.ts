@@ -61,7 +61,7 @@ export const site = {
       initials: 'KK',
       role: 'ARCHITEKT OPROGRAMOWANIA · FACYLITATOR EVENT STORMING',
       roleShort: 'Software Architect · Tech Lead · Microsoft MVP',
-      bio: 'Architekt oprogramowania i tech lead z 15-letnim stażem, Microsoft MVP, certyfikowany architekt AWS i Azure. Projektuje skalowalne systemy w .NET i chmurze. Domain-Driven Design i Event Storming stosuje na co dzień i uczy ich zespoły inżynierskie. Odpowiadał za architekturę produktów dla milionów użytkowników. Trener i prelegent, autor bloga bd90.pl i newslettera „The Architect’s Edge”. Gdy odkłada klawiaturę, sięga po gitarę.',
+      bio: 'Architekt oprogramowania i tech lead z 15-letnim stażem, Microsoft MVP, certyfikowany architekt AWS i Azure. Projektuje skalowalne systemy w .NET i chmurze. DDD i Event Storming stosuje na co dzień i uczy ich zespoły. Trener i prelegent, pisze na bd90.pl. Gdy odkłada klawiaturę, sięga po gitarę.',
       photo: '/images/hosts/kamil.webp',
       links: [
         { label: 'LinkedIn', href: 'https://www.linkedin.com/in/bd-90/' },
