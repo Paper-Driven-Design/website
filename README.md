@@ -34,6 +34,7 @@ npm run preview
 3. Wgraj MP3 do S3: `../paper-driven-design-audio-infra/scripts/upload-episode.sh plik.mp3 002-slug`.
    Skrypt wypisze URL i rozmiar w bajtach — wpisz je w `audio.url` i `audio.bytes` (to `length` w `<enclosure>`).
 4. Link do wersji wideo wpisz w `youtube` (pokazuje się jako przycisk na stronie odcinka, na landingu i w feedzie).
+   Link do odcinka w Spotify wpisz w `spotify` (przycisk na stronie odcinka i na landingu).
 5. Okładkę odcinka 3000x3000 wgraj `scripts/upload-image.sh okladka.jpg episodes/002-slug-3000x3000.jpg` i wpisz URL w `image`.
 6. Notatki PDF do `public/notes/`, zdjęcia prowadzących do `public/images/`.
 
