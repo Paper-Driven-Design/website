@@ -81,7 +81,6 @@ Artur Wojnar — solutions architect, konsultant i prelegent. Pragmatyk projekto
     { label: 'Apple Podcasts', href: '#', comingSoon: true }, // po zatwierdzeniu feedu wpisz link i usuń comingSoon
     { label: 'YouTube', href: 'https://www.youtube.com/@PaperDrivenDesign' },
     { label: 'RSS', href: '/feed.xml' },
-    { label: 'LinkedIn', href: '#' },
   ],
 
   hosts: [

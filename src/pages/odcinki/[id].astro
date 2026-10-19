@@ -35,7 +35,7 @@ const { data } = episode;
 const number = String(data.number).padStart(3, '0');
 const seasonLabel = String(data.season).padStart(2, '0');
 const durationSeconds = data.duration.split(':').reduce((acc, part) => acc * 60 + Number(part), 0);
-const platforms = site.platforms.filter((p) => p.label !== 'LinkedIn');
+const platforms = site.platforms;
 const hostsLine = site.hosts.map((h) => h.name).join(' & ');
 const hasFullTranscript = data.transcript.full.length > 0;
 
@@ -439,7 +439,11 @@ const jsonLd = [
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {data.resources.map((res) => (
-                <a class="group p-6 rounded-[24px] bg-surface-container-low hover:bg-surface-container transition-all flex flex-col justify-between gap-6" href={res.href}>
+                <a
+                  class="group p-6 rounded-[24px] bg-surface-container-low hover:bg-surface-container transition-all flex flex-col justify-between gap-6"
+                  href={res.href}
+                  {...(/^https?:\/\//.test(res.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
                   <div class="flex flex-col gap-3">
                     <div class:list={['w-10 h-10 rounded-full flex items-center justify-center transition-colors', resourceAccent[res.accent].icon]}>
                       <span class="material-symbols-outlined text-[20px]">{res.icon}</span>

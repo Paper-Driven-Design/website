@@ -20,9 +20,26 @@ lead: >-
   oprogramowania i postrzegania samego kodu. Przyjrzymy się kontekstowi
   historycznemu, bo kto nie zna historii, skazany jest na jej ponowne przeżycie.
 
+description: >-
+  Dla wielu inżynierów „kod to towar” brzmi jak ujma na honorze. Pokazujemy, że kod był
+  towarem od dawna: outsourcing, package managery, open source, komponenty kupowane w paczkach,
+  low-code i SaaS. Każdy z tych skoków przyspieszał pracę i jednocześnie podnosił złożoność
+  systemów. Rozmawiamy o różnicy między kodowaniem a programowaniem, o tym, czy wpuszczać agenta
+  AI do domeny core, i dlaczego Martin Fowler porównuje LLM-y do pierwszego kompilatora Fortrana.
+  Są liczby: Windows urósł z 4-5 mln linii kodu w 1993 roku do prawie 30 mln w XP, Debian 4.0 miał
+  300 mln linii, a według badań Hattona kod w systemie podwaja się średnio co 42 miesiące. Do tego
+  prawa Lehmana, shift-left i definicja architektury jako decyzji trudnych do cofnięcia. Wniosek
+  jest jeden: myślenia nie da się zdelegować do modelu.
+
 tags:
   - AI
   - HISTORIA
+
+topics:
+  - AI
+  - LLM
+  - ZŁOŻONOŚĆ
+  - HISTORIA IT
 
 audio:
   url: "https://d3057vo2xyrx9j.cloudfront.net/episodes/001-czy-kod-to-juz-commodity.mp3"
@@ -32,3 +49,99 @@ audio:
 
 youtube: "https://youtu.be/vd8KLksCbDc"
 image: "https://d3057vo2xyrx9j.cloudfront.net/images/episodes/001-czy-kod-to-juz-commodity-3000x3000.jpg"
+
+chapters:
+  - { time: "00:00", seconds: 0, title: "Kod jako towar: ujma na honorze inżyniera?" }
+  - { time: "01:50", seconds: 110, title: "Kodowanie kontra programowanie" }
+  - { time: "02:30", seconds: 150, title: "Outsourcing, domeny core i generyczne: gdzie wpuścić agenta AI" }
+  - { time: "03:52", seconds: 232, title: "Złożoność esencjonalna i przypadkowa (Brooks)" }
+  - { time: "04:42", seconds: 282, title: "Pętla zwrotna: z tygodni do godzin" }
+  - { time: "06:06", seconds: 366, title: "Kod zawsze był towarem: Parnas, wzorce, archetypy" }
+  - { time: "09:04", seconds: 544, title: "Fowler: LLM to nowy kompilator Fortrana" }
+  - { time: "11:34", seconds: 694, title: "Package managery, open source i komponenty Telerika" }
+  - { time: "13:54", seconds: 834, title: "Low-code, no-code, SaaS i płacenie tokenami" }
+  - { time: "15:39", seconds: 939, title: "Złożoność rośnie: Windows 1993 kontra XP" }
+  - { time: "17:43", seconds: 1063, title: "Shift-left i „oszczędności” w Excelu" }
+  - { time: "18:18", seconds: 1098, title: "Debian i kod podwajający się co 42 miesiące" }
+  - { time: "20:32", seconds: 1232, title: "Prawa Lehmana: bez pracy nad złożonością entropia rośnie" }
+  - { time: "21:45", seconds: 1305, title: "Czy za 5-10 lat ktokolwiek ogarnie te systemy?" }
+  - { time: "23:13", seconds: 1393, title: "Brooks: architektura to decyzje trudne do cofnięcia" }
+  - { time: "25:17", seconds: 1517, title: "Co LLM zmienił w pracy architekta?" }
+  - { time: "26:37", seconds: 1597, title: "Package managery czy LLM-y: co bardziej przyspieszyło pracę?" }
+  - { time: "29:35", seconds: 1775, title: "Podsumowanie: myślenie jest w cenie" }
+
+takeaways:
+  - title: "Kod był towarem na długo przed LLM-ami"
+    text: "Outsourcing, package managery, open source, low-code i SaaS to kolejne fale tego samego zjawiska. AI tylko skraca pętlę zwrotną z tygodni do godzin."
+  - title: "Kodowanie to nie programowanie"
+    text: "Agent może klepać kod w domenach generycznych i wspierających. W domenie core nadal liczy się zrozumienie problemu, nie szybkość pisania."
+  - title: "Każde przyspieszenie podnosi złożoność"
+    text: "Windows, Debian i badania Hattona pokazują to samo: liczba linii kodu podwaja się co kilka lat, a bez pracy nad złożonością entropia rośnie (prawa Lehmana)."
+  - title: "Architektura to decyzje trudne do cofnięcia"
+    text: "Według Brooksa to właśnie one odróżniają architekturę od implementacji. LLM nie podejmie ich za Ciebie, a myślenia nie da się zdelegować."
+
+resources:
+  - kind: "Esej · 1986"
+    title: "Fred Brooks, „No Silver Bullet”"
+    text: "Złożoność esencjonalna i przypadkowa. Punkt wyjścia do rozmowy o tym, co AI naprawdę może przyspieszyć."
+    cta: "Czytaj PDF"
+    href: "https://techreports.cs.unc.edu/papers/86-020.pdf"
+    icon: "description"
+    ctaIcon: "open_in_new"
+    accent: "primary"
+  - kind: "Książka · 1975"
+    title: "Fred Brooks, „The Mythical Man-Month”"
+    text: "Stąd definicja architektury jako decyzji trudnych do cofnięcia i rozdział między architekturą a implementacją."
+    cta: "O książce"
+    href: "https://en.wikipedia.org/wiki/The_Mythical_Man-Month"
+    icon: "menu_book"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Artykuł · 1972"
+    title: "David Parnas, „On the Criteria To Be Used in Decomposing Systems into Modules”"
+    text: "Ukrywanie informacji i podział na moduły. Pierwszy krok do traktowania kodu jak wymiennych komponentów."
+    cta: "Czytaj PDF"
+    href: "https://www.cse.sc.edu/~mgv/csce590f20/ParnasCriteria.pdf"
+    icon: "description"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Artykuł · 2025"
+    title: "Martin Fowler, „LLMs bring new nature of abstraction”"
+    text: "Porównanie LLM-ów do przejścia z asemblera na języki wysokiego poziomu, czyli do pierwszego kompilatora Fortrana."
+    cta: "Czytaj na martinfowler.com"
+    href: "https://martinfowler.com/articles/2025-nature-abstraction.html"
+    icon: "smart_toy"
+    ctaIcon: "open_in_new"
+    accent: "primary"
+  - kind: "Badanie · 2017"
+    title: "Hatton, Spinellis, van Genuchten, „The long-term growth rate of evolving software”"
+    text: "404 mln linii kodu z systemów otwartych i zamkniętych. Wniosek: kod podwaja się średnio co 42 miesiące."
+    cta: "Czytaj PDF"
+    href: "https://www.spinellis.gr/pubs/jrnl/2016-JSME-cagr/html/HSG17.pdf"
+    icon: "monitoring"
+    ctaIcon: "open_in_new"
+    accent: "tertiary"
+  - kind: "Badanie · 2009"
+    title: "Gonzalez-Barahona i in., „Macro-level software evolution”: Debian 2.2 → 4.0"
+    text: "Skąd 300 mln linii i dziesięciokrotny wzrost liczby pakietów. Debian podwajał rozmiar co dwa lata."
+    cta: "Czytaj"
+    href: "https://cyrius.com/publications/barahona_et_al-macro_evolution"
+    icon: "monitoring"
+    ctaIcon: "open_in_new"
+    accent: "tertiary"
+  - kind: "Teoria · 1974"
+    title: "Prawa Lehmana ewolucji oprogramowania"
+    text: "Rosnąca złożoność, ciągła zmiana, samoregulacja. Osiem praw, do których wracamy przy każdym starym systemie."
+    cta: "Czytaj"
+    href: "https://en.wikipedia.org/wiki/Lehman%27s_laws_of_software_evolution"
+    icon: "balance"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Blog · Artur"
+    title: "„Why does entropy kill my software?”"
+    text: "Wpis Artura o tym, dlaczego architektura dąży do chaosu i jak trzymać entropię w ryzach. Parafraza Lehmana w praktyce."
+    cta: "Czytaj na planthencode.com"
+    href: "https://www.planthencode.com/articles/why-entropy-kills-software/"
+    icon: "edit_note"
+    ctaIcon: "open_in_new"
+    accent: "primary"
