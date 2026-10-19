@@ -24,7 +24,7 @@ const metaLeft = [`ODC. ${number}`, data.badge].filter(Boolean).join(' · ');
       class="meta-tag text-ink-muted mb-4 pb-3 border-b border-hairline/50 flex justify-between items-center gap-4"
     >
       <span class:list={[latest && 'text-flight font-semibold']}>{metaLeft}</span>
-      <span class="text-right">{data.durationMinutes} MIN · {data.monthLabel}</span>
+      <span class="text-right">{data.durationMinutes} MIN · <time datetime={data.date.toISOString().slice(0, 7)}>{data.monthLabel}</time></span>
     </div>
     <h3
       class="font-display text-[30px] font-bold text-ink uppercase leading-tight mb-4 hover:text-flight-link transition-colors"

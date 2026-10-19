@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Newsletter from '../../components/Newsletter.astro';
 import Avatar from '../../components/Avatar.astro';
 import { site } from '../../data/site';
+import { breadcrumbLd, episodeUrl, isoDate, organizationLd, personLd, plainTitle, podcastEpisodeLd, podcastSeriesLd } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const episodes = await getCollection('episodes', ({ data }) => data.status === 'published');
@@ -50,11 +51,34 @@ const resourceAccent = {
   },
 };
 
-const pageTitle = `${data.title} — Odcinek ${number} | ${site.name}`;
+const titleText = plainTitle(data);
+const pageTitle = `${titleText} | Odcinek ${number} | ${site.name}`;
+const pageDescription = `Odcinek ${number} podcastu ${site.name} (${data.duration}). ${data.summary.replace(/\s+/g, ' ').trim()}`;
+const jsonLd = [
+  organizationLd(),
+  podcastSeriesLd(),
+  ...site.hosts.map(personLd),
+  podcastEpisodeLd(episode),
+  breadcrumbLd([
+    { name: site.name, url: `${site.url}/` },
+    { name: 'Odcinki', url: `${site.url}/#odcinki` },
+    { name: `Odcinek ${number}: ${titleText}`, url: episodeUrl(episode.id) },
+  ]),
+];
 ---
 
-<BaseLayout title={pageTitle} description={data.summary} icons ogType="article" image={data.image ?? site.podcast.cover}>
-  <div class="flex flex-col w-full">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  icons
+  ogType="article"
+  image={data.image ?? site.podcast.cover}
+  imageAlt={`${site.name} — odcinek ${number}: ${titleText}`}
+  publishedTime={isoDate(data.date)}
+  audioUrl={data.audio.url}
+  jsonLd={jsonLd}
+>
+  <article class="flex flex-col w-full">
     <!-- Okruszki + skróty do platform -->
     <section class="container-site w-full pt-8 pb-4">
       <div class="flex flex-wrap items-center justify-between gap-4">
@@ -99,7 +123,7 @@ const pageTitle = `${data.title} — Odcinek ${number} | ${site.name}`;
           <span class="px-3.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-mono text-mono-meta font-semibold uppercase">ODCINEK {number}</span>
           <span class="px-3.5 py-1 rounded-full bg-surface-container text-tertiary font-mono text-mono-meta uppercase">SEZON {seasonLabel}</span>
           <span class="px-3.5 py-1 rounded-full bg-surface-container text-tertiary font-mono text-mono-meta uppercase">{data.durationMinutes} MIN</span>
-          <span class="px-3.5 py-1 rounded-full bg-surface-container text-tertiary font-mono text-mono-meta uppercase">PREMIERA {data.dateLabel}</span>
+          <span class="px-3.5 py-1 rounded-full bg-surface-container text-tertiary font-mono text-mono-meta uppercase">PREMIERA <time datetime={isoDate(data.date)}>{data.dateLabel}</time></span>
         </div>
 
         <h1 class="font-display text-[36px] leading-[34px] sm:text-headline-lg sm:leading-[52px] uppercase text-on-surface tracking-tight max-w-5xl mb-6 relative">
@@ -584,7 +608,7 @@ const pageTitle = `${data.title} — Odcinek ${number} | ${site.name}`;
     </section>
 
     <Newsletter variant="light" id="newsletter" />
-  </div>
+  </article>
 </BaseLayout>
 
 <script src="../../scripts/player.ts"></script>

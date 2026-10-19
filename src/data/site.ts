@@ -15,6 +15,11 @@ export const site = {
   cadence: 'Nowe odcinki co dwa tygodnie',
   copyright: '© 2026 Paper Driven Design. Kamil Kiełbasa & Artur Wojnar. Wszystkie prawa zastrzeżone.',
 
+  /** SEO: kod weryfikacyjny Google Search Console (meta google-site-verification). Pusty = tag pominięty. */
+  seo: {
+    googleSiteVerification: '',
+  },
+
   /** Formularz newslettera: endpoint zapisu do Brevo (projekt Vercel w katalogu api/).
    *  Pusty string = formularz działa w trybie demo (bez wysyłki). */
   newsletterAction: 'https://api.paperdriven.design/subscribe',
@@ -107,6 +112,30 @@ Artur Wojnar — solutions architect, konsultant i prelegent. Pragmatyk projekto
         { label: 'Blog', href: 'https://www.planthencode.com/' },
         { label: 'Sessionize', href: 'https://sessionize.com/arturwojnar/' },
       ],
+    },
+  ],
+
+  /** Pytania i odpowiedzi na landingu + schema FAQPage + /llms.txt (asystenci AI cytują takie bloki). */
+  faq: [
+    {
+      q: 'Czym jest Paper Driven Design?',
+      a: 'To polski podcast o architekturze oprogramowania i projektowaniu systemów. Prowadzą go Kamil Kiełbasa i Artur Wojnar, architekci z 15-letnim stażem. Rozmawiamy o tym, jak myśleć o systemie, zanim powstanie kod: o Domain-Driven Design, Event Stormingu, decyzjach architektonicznych i o tym, co AI naprawdę zmienia w pracy architekta.',
+    },
+    {
+      q: 'Dla kogo jest ten podcast?',
+      a: 'Dla programistów, tech leadów i architektów, którzy chcą projektować systemy świadomie, oraz dla osób z biznesu, które chcą lepiej rozmawiać z inżynierami o produkcie. Nie wymagamy wiedzy o konkretnym języku ani frameworku.',
+    },
+    {
+      q: 'Gdzie można słuchać Paper Driven Design?',
+      a: 'Na Spotify, na YouTube (wersja wideo) i bezpośrednio na tej stronie. Kanał RSS https://paperdriven.design/feed.xml działa w każdej aplikacji podcastowej. Apple Podcasts wkrótce.',
+    },
+    {
+      q: 'Jak często pojawiają się nowe odcinki?',
+      a: 'Nowe odcinki co dwa tygodnie. Każdy ma własną stronę z opisem, linkami do materiałów i, gdy to możliwe, rozdziałami i transkrypcją.',
+    },
+    {
+      q: 'Co znaczy „paper driven”?',
+      a: 'Że złożoność rozstrzygamy na papierze, zanim trafi do kodu. Kod jest najdroższym miejscem na popełnianie błędów koncepcyjnych, więc najpierw modelujemy, rysujemy i rozmawiamy z biznesem, a dopiero potem programujemy.',
     },
   ],
 

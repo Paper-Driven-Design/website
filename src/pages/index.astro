@@ -7,6 +7,7 @@ import Newsletter from '../components/Newsletter.astro';
 import PlayIcon from '../components/PlayIcon.astro';
 import Avatar from '../components/Avatar.astro';
 import { site } from '../data/site';
+import { faqLd, organizationLd, personLd, podcastSeriesLd, websiteLd } from '../lib/seo';
 
 const all = await getCollection('episodes');
 const published = all
@@ -26,9 +27,11 @@ const latestDurationSeconds = latest.data.duration
 const allTags = Array.from(new Set(published.flatMap((e) => e.data.tags)));
 const seasonLabel = `S${String(latest.data.season).padStart(2, '0')}`;
 const episodeCountLabel = String(published.length).padStart(2, '0');
+
+const jsonLd = [websiteLd(), organizationLd(), podcastSeriesLd(), ...site.hosts.map(personLd), faqLd(site.faq)];
 ---
 
-<BaseLayout>
+<BaseLayout jsonLd={jsonLd}>
   <!-- HERO -->
   <section class="container-site pt-16 pb-20">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -219,8 +222,11 @@ const episodeCountLabel = String(published.length).padStart(2, '0');
                   <img
                     src={host.photo}
                     alt={`Portret: ${host.name}`}
+                    width="800"
+                    height="600"
                     class="w-full aspect-[4/3] object-cover rounded-[16px] bg-surface-variant mb-4"
                     loading="lazy"
+                    decoding="async"
                   />
                 )}
                 <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono text-ink">
@@ -263,6 +269,29 @@ const episodeCountLabel = String(published.length).padStart(2, '0');
         }
       </div>
     </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-site pb-20" id="faq" aria-labelledby="faq-heading">
+    <div class="mb-10 pb-4 border-b border-hairline flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <span class="meta-tag text-ink-muted block mb-2">W SKRÓCIE</span>
+        <h2 id="faq-heading" class="font-display-section text-[40px] lg:text-[48px] text-ink">PYTANIA I ODPOWIEDZI</h2>
+      </div>
+      <p class="font-sans text-ink-muted text-base max-w-md">
+        Najkrótsza wersja tego, czym jest podcast, dla kogo go robimy i gdzie go znaleźć.
+      </p>
+    </div>
+    <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+      {
+        site.faq.map((item) => (
+          <div class="bg-card-soft rounded-[20px] p-6 lg:p-8 border border-hairline/40">
+            <dt class="font-display text-2xl font-bold text-ink uppercase mb-3">{item.q}</dt>
+            <dd class="font-sans text-ink-muted text-base leading-relaxed">{item.a}</dd>
+          </div>
+        ))
+      }
+    </dl>
   </section>
 
   <Newsletter variant="dark" />

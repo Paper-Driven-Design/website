@@ -3,6 +3,7 @@ import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { site } from '../data/site';
+import { jsonLdGraph, serializeLd } from '../lib/seo';
 
 interface Props {
   title?: string;
@@ -10,8 +11,17 @@ interface Props {
   /** Ładuje font ikon Material Symbols (używany tylko na stronie odcinka). */
   icons?: boolean;
   ogType?: 'website' | 'article';
-  /** Pełny URL grafiki og:image (domyślnie okładka podcastu). */
+  /** Pełny URL grafiki og:image (domyślnie okładka podcastu, 3000x3000). */
   image?: string;
+  imageAlt?: string;
+  /** Węzły schema.org (bez @context) — layout składa je w jeden graf JSON-LD. */
+  jsonLd?: Record<string, unknown>[];
+  /** Data publikacji (YYYY-MM-DD) dla og:type=article. */
+  publishedTime?: string;
+  /** URL pliku MP3 — og:audio, dzięki czemu komunikatory pokazują odtwarzacz w podglądzie linku. */
+  audioUrl?: string;
+  /** Strony techniczne (404) — nie indeksuj. */
+  noindex?: boolean;
 }
 
 const {
@@ -20,9 +30,15 @@ const {
   icons = false,
   ogType = 'website',
   image = site.podcast.cover,
+  imageAlt = `${site.name} — okładka podcastu`,
+  jsonLd = [],
+  publishedTime,
+  audioUrl,
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, site.url).toString();
+const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 ---
 
 <!doctype html>
@@ -32,9 +48,14 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="author" content={site.podcast.author} />
+    <meta name="theme-color" content="#f8f6f1" />
+    {site.seo.googleSiteVerification && <meta name="google-site-verification" content={site.seo.googleSiteVerification} />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate" type="application/rss+xml" title={site.name} href={site.podcast.feedPath} />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} — podcast`} href={site.podcast.feedPath} />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.name} />
@@ -43,8 +64,20 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="pl_PL" />
     <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="3000" />
+    <meta property="og:image:height" content="3000" />
+    <meta property="og:image:alt" content={imageAlt} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {publishedTime && site.hosts.map((h) => <meta property="article:author" content={h.name} />)}
+    {audioUrl && <meta property="og:audio" content={audioUrl} />}
+    {audioUrl && <meta property="og:audio:type" content="audio/mpeg" />}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    {jsonLd.length > 0 && <script type="application/ld+json" set:html={serializeLd(jsonLdGraph(jsonLd))} />}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

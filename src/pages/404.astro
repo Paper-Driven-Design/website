@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../data/site';
+
+const latest = (await getCollection('episodes', ({ data }) => data.status === 'published')).sort(
+  (a, b) => b.data.number - a.data.number,
+)[0];
+---
+
+<BaseLayout title={`Nie znaleziono strony | ${site.name}`} description="Tej strony nie ma. Wróć do biblioteki odcinków Paper Driven Design." noindex>
+  <section class="container-site py-24 lg:py-32">
+    <div class="max-w-3xl">
+      <span class="meta-tag text-flight block mb-4">BŁĄD 404</span>
+      <h1 class="font-display-hero text-[56px] sm:text-[80px] text-ink mb-6">TEJ STRONY NIE MA NA PAPIERZE.</h1>
+      <p class="font-sans text-xl text-ink-muted leading-relaxed mb-10">
+        Adres mógł się zmienić albo nigdy nie istniał. Odcinki, prowadzący i manifest są na stronie głównej.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a class="btn-flight px-7 py-3.5 text-base" href="/">Strona główna</a>
+        <a class="btn-secondary px-7 py-3.5 text-base" href="/#odcinki">Biblioteka odcinków</a>
+        {latest && <a class="btn-secondary px-7 py-3.5 text-base" href={`/odcinki/${latest.id}/`}>Najnowszy odcinek</a>}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

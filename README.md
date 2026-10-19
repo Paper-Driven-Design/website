@@ -25,6 +25,9 @@ npm run preview
 | `src/pages/index.astro` | Landing |
 | `src/pages/odcinki/[id].astro` | Strona odcinka (odtwarzacz, rozdziały, materiały, transkrypcja) |
 | `src/pages/feed.xml.ts` | Kanał podcastowy (RSS + iTunes) dla Spotify / Apple; `/rss.xml` to alias |
+| `src/pages/llms.txt.ts` | Streszczenie strony w Markdownie dla asystentów AI (`/llms.txt`) |
+| `src/lib/seo.ts` | Dane strukturalne schema.org (PodcastSeries, PodcastEpisode, Person, FAQPage, okruszki) |
+| `src/pages/404.astro` | Strona błędu (GitHub Pages serwuje `404.html`) |
 | `src/scripts/player.ts` | Odtwarzacz audio (działa z plikiem MP3, a bez niego w trybie podglądu) |
 
 ## Dodanie odcinka
@@ -48,6 +51,21 @@ Najnowszy opublikowany odcinek automatycznie trafia do sekcji „Najnowszy” na
 - `src/data/site.ts` → `podcast.ownerEmail`: Apple i Spotify wymagają adresu właściciela w feedzie (wysyłają tam kod weryfikacyjny). Dopóki jest pusty, feed nie ma `<itunes:owner>`.
 - `astro.config.mjs` → `site` (używany do canonical i RSS).
 - `public/favicon.svg`.
+
+## SEO i AEO
+
+Co strona robi sama przy każdym buildzie:
+
+- `sitemap-index.xml` (integracja `@astrojs/sitemap`), `robots.txt` w `public/` wpuszcza wszystkie roboty, także asystentów AI, i wskazuje sitemapę.
+- JSON-LD w `<head>`: landing = WebSite + Organization + PodcastSeries + Person (prowadzący) + FAQPage; strona odcinka = PodcastEpisode (z AudioObject, VideoObject z YouTube, rozdziałami jako Clip, transkrypcją) + BreadcrumbList.
+- Meta: canonical, robots, Open Graph z `og:image` 3000x3000 i `og:audio` (MP3) na odcinkach, `article:published_time`, Twitter card.
+- `/llms.txt`: streszczenie podcastu, prowadzących, odcinków i FAQ w Markdownie (format llmstxt.org) dla ChatGPT, Claude, Perplexity.
+- Sekcja FAQ na landingu z `site.faq` — treść, którą asystenci AI cytują najchętniej; edytuj tam, schema i `llms.txt` zaktualizują się same.
+
+Do zrobienia ręcznie:
+
+- Google Search Console: dodaj usługę dla `paperdriven.design`, kod z metody „tag HTML” wpisz w `site.seo.googleSiteVerification`, potem prześlij `https://paperdriven.design/sitemap-index.xml`. Analogicznie Bing Webmaster Tools (importuje z GSC).
+- Test danych strukturalnych: https://validator.schema.org/ i https://search.google.com/test/rich-results (wklej URL strony odcinka).
 
 ## Kanał podcastowy
 

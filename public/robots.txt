@@ -1,0 +1,19 @@
+# Paper Driven Design — https://paperdriven.design
+# Cała strona jest publiczna. Roboty wyszukiwarek i asystentów AI mają pełny dostęp.
+
+User-agent: *
+Allow: /
+
+# Asystenci AI (ChatGPT, Claude, Perplexity, Google AI) — wpuszczone świadomie,
+# żeby podcast pojawiał się w ich odpowiedziach. Skrót treści dla nich: /llms.txt
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://paperdriven.design/sitemap-index.xml
