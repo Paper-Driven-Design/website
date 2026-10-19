@@ -25,8 +25,9 @@ import { site } from '../data/site';
       }
     </nav>
 
-    <div class="font-mono text-xs text-dark-muted md:text-right">
-      {site.copyright}
+    <div class="font-mono text-xs text-dark-muted md:text-right flex flex-col gap-2 md:items-end">
+      <span>{site.copyright}</span>
+      <a class="underline hover:text-dark-text transition-colors" href={site.legal.policyPath}>Polityka prywatności</a>
     </div>
   </div>
 </footer>

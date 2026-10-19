@@ -15,6 +15,15 @@ export const site = {
   cadence: 'Nowe odcinki co dwa tygodnie',
   copyright: '© 2026 Paper Driven Design. Kamil Kiełbasa & Artur Wojnar. Wszystkie prawa zastrzeżone.',
 
+  /** Dane do polityki prywatności (/polityka-prywatnosci/). Administrator = osoby prowadzące listę newslettera. */
+  legal: {
+    administrator: 'Kamil Kiełbasa i Artur Wojnar, prowadzący podcast Paper Driven Design',
+    /** Adres do spraw danych osobowych — publiczny na stronie polityki. UZUPEŁNIJ przed publikacją. */
+    contactEmail: 'kamil@linecode.pl',
+    policyUpdated: '19 października 2026',
+    policyPath: '/polityka-prywatnosci/',
+  },
+
   /** SEO: kod weryfikacyjny Google Search Console (meta google-site-verification). Pusty = tag pominięty. */
   seo: {
     googleSiteVerification: '',

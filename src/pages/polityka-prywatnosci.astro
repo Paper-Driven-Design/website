@@ -1,0 +1,266 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const { legal } = site;
+const contact = legal.contactEmail || '[adres e-mail do kontaktu — uzupełnij w src/data/site.ts]';
+
+const sections = [
+  { id: 'administrator', title: 'I. Administrator danych osobowych' },
+  { id: 'zakres', title: 'II. Jakie dane zbieramy i skąd' },
+  { id: 'cele', title: 'III. Cele i podstawy prawne przetwarzania' },
+  { id: 'odbiorcy', title: 'IV. Komu powierzamy dane' },
+  { id: 'eog', title: 'V. Przekazywanie danych poza Europejski Obszar Gospodarczy' },
+  { id: 'okres', title: 'VI. Okres przechowywania danych' },
+  { id: 'prawa', title: 'VII. Twoje prawa' },
+  { id: 'cookies', title: 'VIII. Pliki cookies i technologie śledzące' },
+  { id: 'linki', title: 'IX. Linki do serwisów zewnętrznych' },
+  { id: 'zmiany', title: 'X. Zmiany polityki' },
+];
+---
+
+<BaseLayout
+  title={`Polityka prywatności | ${site.name}`}
+  description="Jakie dane zbiera strona i newsletter Paper Driven Design, po co, komu je powierzamy i jakie masz prawa. Bez cookies śledzących, bez analityki."
+>
+  <article class="container-site py-16 lg:py-20">
+    <header class="max-w-3xl mb-12">
+      <span class="meta-tag text-flight block mb-4">DOKUMENT</span>
+      <h1 class="font-display-hero text-[48px] sm:text-[72px] text-ink mb-6">POLITYKA PRYWATNOŚCI</h1>
+      <p class="font-sans text-lg text-ink-muted leading-relaxed">
+        Ta strona i newsletter zbierają minimum danych: adres e-mail, jeśli sam go podasz, oraz dane techniczne, które
+        serwery zapisują przy każdym wejściu na stronę. Nie używamy cookies śledzących ani narzędzi analitycznych.
+        Poniżej opisujemy, co dokładnie dzieje się z Twoimi danymi i jakie masz prawa.
+      </p>
+      <p class="font-mono text-xs text-ink-muted mt-6">Ostatnia aktualizacja: {legal.policyUpdated}</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <nav aria-label="Spis treści" class="lg:col-span-4 lg:sticky lg:top-8 self-start">
+        <div class="bg-card-soft rounded-[20px] p-6 border border-hairline/40">
+          <span class="meta-tag text-ink-muted block mb-4">SPIS TREŚCI</span>
+          <ol class="flex flex-col gap-2 font-sans text-sm">
+            {sections.map((s) => (
+              <li>
+                <a class="text-ink-muted hover:text-flight-link transition-colors" href={`#${s.id}`}>{s.title}</a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </nav>
+
+      <div class="lg:col-span-8 max-w-3xl flex flex-col gap-12 font-sans text-base text-ink leading-relaxed [&_h2]:font-display [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:uppercase [&_h2]:text-ink [&_h2]:mb-4 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_li]:mb-2 [&_a]:text-flight-link [&_a]:underline [&_strong]:font-semibold">
+        <section id="wstep">
+          <p>
+            Ochronę danych osób odwiedzających stronę <strong>paperdriven.design</strong> („Strona”) i subskrybentów
+            newslettera „Paper Notes” traktujemy poważnie, ale bez przesady: zbieramy tylko to, co jest potrzebne do
+            działania Strony i wysyłki newslettera. Niniejsza polityka wyjaśnia, jakie dane przetwarzamy, w jakim celu,
+            na jakiej podstawie, komu je powierzamy i jakie prawa przysługują Ci jako osobie, której dane dotyczą.
+          </p>
+          <p>
+            Dokument jest zgodny z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r.
+            w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych (dalej „RODO”), w szczególności
+            z obowiązkiem informacyjnym z art. 13 RODO.
+          </p>
+        </section>
+
+        <section id="administrator">
+          <h2>I. Administrator danych osobowych</h2>
+          <p>
+            Administratorem Twoich danych osobowych jest <strong>{legal.administrator}</strong> (dalej „Administrator”
+            lub „my”).
+          </p>
+          <p>
+            We wszystkich sprawach dotyczących danych osobowych możesz się z nami skontaktować pod adresem e-mail:{' '}
+            <strong>{contact}</strong>. Nie wyznaczyliśmy inspektora ochrony danych, bo skala przetwarzania tego nie
+            wymaga.
+          </p>
+        </section>
+
+        <section id="zakres">
+          <h2>II. Jakie dane zbieramy i skąd</h2>
+          <p>Przetwarzamy wyłącznie dwie kategorie danych:</p>
+          <ul>
+            <li>
+              <strong>Adres e-mail</strong>, który podajesz dobrowolnie w formularzu zapisu do newslettera. To jedyna
+              dana, o którą prosimy. Nie pytamy o imię, nazwisko ani inne informacje.
+            </li>
+            <li>
+              <strong>Dane techniczne</strong> zapisywane automatycznie przez serwery, z których korzysta Strona, przy
+              każdym żądaniu: adres IP, data i godzina, adres odwiedzanej podstrony lub pobieranego pliku audio, typ
+              przeglądarki i systemu operacyjnego (tzw. user agent) oraz adres strony, z której przyszedłeś (referer).
+              Są to standardowe logi serwerowe, które prowadzi każdy dostawca hostingu. My nie mamy do nich bieżącego
+              dostępu i nie łączymy ich z adresami e-mail.
+            </li>
+          </ul>
+          <p>
+            Strona nie ma kont użytkowników, komentarzy, płatności ani formularzy innych niż zapis do newslettera.
+          </p>
+        </section>
+
+        <section id="cele">
+          <h2>III. Cele i podstawy prawne przetwarzania</h2>
+          <ul>
+            <li>
+              <strong>Wysyłka newslettera</strong>: informacje o nowych odcinkach podcastu, notatki, schematy i materiały
+              dodatkowe. Podstawą prawną jest Twoja zgoda (art. 6 ust. 1 lit. a RODO), którą wyrażasz, wpisując adres
+              e-mail i klikając przycisk zapisu. Zgodę możesz cofnąć w każdej chwili, klikając link rezygnacji w stopce
+              dowolnej wiadomości albo pisząc do nas. Cofnięcie zgody nie wpływa na zgodność z prawem przetwarzania
+              sprzed jej cofnięcia.
+            </li>
+            <li>
+              <strong>Zapewnienie działania i bezpieczeństwa Strony</strong>: dostarczenie treści i plików audio,
+              ochrona przed nadużyciami, diagnozowanie błędów. Podstawą prawną jest nasz prawnie uzasadniony interes
+              (art. 6 ust. 1 lit. f RODO) polegający na utrzymaniu działającej i bezpiecznej strony internetowej.
+            </li>
+            <li>
+              <strong>Ustalenie, dochodzenie lub obrona roszczeń</strong>, gdyby zaszła taka potrzeba. Podstawą prawną
+              jest nasz prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO).
+            </li>
+          </ul>
+          <p>
+            Podanie adresu e-mail jest dobrowolne, ale bez niego nie możemy wysłać Ci newslettera. Nie podejmujemy
+            decyzji opartych wyłącznie na zautomatyzowanym przetwarzaniu, w tym profilowaniu. Nie sprzedajemy danych i
+            nie udostępniamy ich nikomu do celów marketingowych.
+          </p>
+        </section>
+
+        <section id="odbiorcy">
+          <h2>IV. Komu powierzamy dane</h2>
+          <p>
+            Korzystamy z usług dostawców, którzy przetwarzają dane w naszym imieniu na podstawie umów powierzenia
+            przetwarzania (art. 28 RODO). Są to:
+          </p>
+          <ul>
+            <li>
+              <strong>Brevo</strong> (Sendinblue SAS, Paryż, Francja): przechowuje listę subskrybentów i wysyła
+              newsletter. Tu trafia Twój adres e-mail.{' '}
+              <a href="https://www.brevo.com/legal/privacypolicy/" target="_blank" rel="noopener noreferrer">Polityka prywatności Brevo</a>.
+            </li>
+            <li>
+              <strong>Vercel Inc.</strong> (USA): obsługuje formularz zapisu, czyli przekazuje Twój adres e-mail ze
+              Strony do Brevo. Przy tej operacji w logach Vercel zapisywany jest Twój adres IP.{' '}
+              <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Polityka prywatności Vercel</a>.
+            </li>
+            <li>
+              <strong>GitHub Inc.</strong> (USA, spółka Microsoft): hostuje Stronę w usłudze GitHub Pages i prowadzi
+              logi serwerowe opisane w sekcji II.{' '}
+              <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">Polityka prywatności GitHub</a>.
+            </li>
+            <li>
+              <strong>Amazon Web Services EMEA SARL</strong> (Luksemburg): przechowuje i serwuje pliki audio odcinków
+              oraz okładki przez sieć Amazon CloudFront. Pliki leżą w regionie Frankfurt (UE), ale CloudFront dostarcza
+              je z serwera najbliższego Tobie. Logowanie dostępu do plików mamy wyłączone.{' '}
+              <a href="https://aws.amazon.com/privacy/" target="_blank" rel="noopener noreferrer">Polityka prywatności AWS</a>.
+            </li>
+            <li>
+              <strong>Google LLC</strong> (USA): Strona ładuje kroje pisma z usługi Google Fonts. Przy pobraniu czcionek
+              Google otrzymuje Twój adres IP i dane przeglądarki.{' '}
+              <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener noreferrer">Informacja Google o prywatności w Google Fonts</a>.
+            </li>
+          </ul>
+          <p>
+            Dane mogą zostać ujawnione także organom publicznym, jeśli zobowiązuje nas do tego prawo.
+          </p>
+        </section>
+
+        <section id="eog">
+          <h2>V. Przekazywanie danych poza Europejski Obszar Gospodarczy</h2>
+          <p>
+            Część wymienionych dostawców (Vercel, GitHub, Google, częściowo AWS) ma siedzibę lub serwery w Stanach
+            Zjednoczonych. Przekazanie danych do USA odbywa się na podstawie decyzji Komisji Europejskiej z 10 lipca
+            2023 r. stwierdzającej odpowiedni stopień ochrony w ramach <strong>EU-US Data Privacy Framework</strong>
+            (wszyscy wymienieni dostawcy są w nim certyfikowani) oraz, pomocniczo, standardowych klauzul umownych
+            zatwierdzonych przez Komisję Europejską (art. 46 ust. 2 lit. c RODO). Kopię stosowanych zabezpieczeń możesz
+            uzyskać, pisząc na adres podany w sekcji I.
+          </p>
+          <p>Lista subskrybentów newslettera jest przechowywana przez Brevo na serwerach w Unii Europejskiej.</p>
+        </section>
+
+        <section id="okres">
+          <h2>VI. Okres przechowywania danych</h2>
+          <ul>
+            <li>
+              <strong>Adres e-mail</strong>: do momentu wypisania się z newslettera albo cofnięcia zgody w inny sposób.
+              Po wypisaniu adres jest usuwany z listy wysyłkowej; Brevo może przez krótki czas przechowywać go na liście
+              wykluczeń, żeby nie wysłać Ci niczego przez pomyłkę.
+            </li>
+            <li>
+              <strong>Logi serwerowe</strong>: przez okres ustalony przez danego dostawcę hostingu, zwykle od kilku dni
+              do kilku tygodni, po czym są usuwane lub anonimizowane.
+            </li>
+            <li>
+              Jeśli dane będą potrzebne do ustalenia, dochodzenia lub obrony roszczeń, przechowamy je do upływu okresu
+              przedawnienia.
+            </li>
+          </ul>
+        </section>
+
+        <section id="prawa">
+          <h2>VII. Twoje prawa</h2>
+          <p>W związku z przetwarzaniem danych osobowych przysługuje Ci prawo do:</p>
+          <ul>
+            <li><strong>dostępu</strong> do swoich danych i uzyskania ich kopii (art. 15 RODO),</li>
+            <li><strong>sprostowania</strong> danych, jeśli są nieprawidłowe lub niekompletne (art. 16 RODO),</li>
+            <li><strong>usunięcia</strong> danych, tzw. prawo do bycia zapomnianym (art. 17 RODO),</li>
+            <li><strong>ograniczenia przetwarzania</strong> (art. 18 RODO),</li>
+            <li>
+              <strong>przenoszenia danych</strong>, czyli otrzymania ich w ustrukturyzowanym formacie nadającym się do
+              odczytu maszynowego (art. 20 RODO),
+            </li>
+            <li>
+              <strong>sprzeciwu</strong> wobec przetwarzania opartego na prawnie uzasadnionym interesie (art. 21 RODO),
+            </li>
+            <li>
+              <strong>cofnięcia zgody</strong> w dowolnym momencie, bez wpływu na zgodność z prawem przetwarzania przed
+              jej cofnięciem (art. 7 ust. 3 RODO). Najprościej: link rezygnacji w stopce każdego newslettera.
+            </li>
+          </ul>
+          <p>
+            Aby skorzystać z tych praw, napisz na adres podany w sekcji I. Odpowiemy bez zbędnej zwłoki, nie później niż w
+            ciągu miesiąca od otrzymania żądania.
+          </p>
+          <p>
+            Jeśli uznasz, że przetwarzamy Twoje dane niezgodnie z prawem, masz prawo wnieść skargę do organu nadzorczego.
+            W Polsce jest nim <strong>Prezes Urzędu Ochrony Danych Osobowych</strong>, ul. Stawki 2, 00-193 Warszawa,{' '}
+            <a href="https://uodo.gov.pl" target="_blank" rel="noopener noreferrer">uodo.gov.pl</a>.
+          </p>
+        </section>
+
+        <section id="cookies">
+          <h2>VIII. Pliki cookies i technologie śledzące</h2>
+          <p>
+            <strong>Strona nie zapisuje własnych plików cookies</strong> ani innych identyfikatorów w Twojej przeglądarce.
+            Nie korzystamy z Google Analytics ani innych narzędzi analitycznych, pikseli reklamowych, map ciepła ani
+            systemów śledzących. Dlatego nie wyświetlamy banera cookies: nie ma na co wyrażać zgody.
+          </p>
+          <p>
+            Odtwarzacz audio działa w całości w Twojej przeglądarce i nie wysyła nam informacji o tym, czego i jak długo
+            słuchasz. Jeśli zmieni się to w przyszłości, zaktualizujemy tę politykę, zanim wprowadzimy zmianę.
+          </p>
+        </section>
+
+        <section id="linki">
+          <h2>IX. Linki do serwisów zewnętrznych</h2>
+          <p>
+            Na Stronie znajdują się linki do serwisów, na których publikujemy podcast (Spotify, YouTube, Apple Podcasts)
+            oraz do stron prowadzących i materiałów omawianych w odcinkach. Nie osadzamy odtwarzaczy tych serwisów na
+            Stronie, więc samo wejście na paperdriven.design nie przekazuje im żadnych danych. Po kliknięciu w link
+            trafiasz do serwisu zewnętrznego, który stosuje własną politykę prywatności i własne cookies. Nie mamy na nie
+            wpływu i zachęcamy do zapoznania się z nimi.
+          </p>
+        </section>
+
+        <section id="zmiany">
+          <h2>X. Zmiany polityki</h2>
+          <p>
+            Polityka może się zmienić, gdy zmienią się nasze narzędzia, przepisy albo zakres tego, co robimy na Stronie.
+            Aktualna wersja jest zawsze dostępna pod adresem{' '}
+            <a href={legal.policyPath}>paperdriven.design{legal.policyPath}</a>, a data ostatniej aktualizacji widnieje na
+            górze dokumentu. O istotnych zmianach dotyczących newslettera poinformujemy subskrybentów e-mailem.
+          </p>
+        </section>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
