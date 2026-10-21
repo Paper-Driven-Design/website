@@ -20,13 +20,20 @@ export const site = {
     administrator: 'Kamil Kiełbasa i Artur Wojnar, prowadzący podcast Paper Driven Design',
     /** Adres do spraw danych osobowych — publiczny na stronie polityki. UZUPEŁNIJ przed publikacją. */
     contactEmail: 'kamil@linecode.pl',
-    policyUpdated: '19 października 2026',
+    policyUpdated: '21 października 2026',
     policyPath: '/polityka-prywatnosci/',
   },
 
   /** SEO: kod weryfikacyjny Google Search Console (meta google-site-verification). Pusty = tag pominięty. */
   seo: {
     googleSiteVerification: '',
+  },
+
+  /** Analityka: PostHog (EU Cloud, Frankfurt). Pusty klucz = analityka wyłączona.
+   *  Tryb bez cookies: zbieramy tylko odsłony stron i uruchomienia odtwarzacza (zdarzenie `episode_play`). */
+  analytics: {
+    posthogKey: 'phc_BzYbsmrdpHJmwazbFAgeisVNp7bLeVxJZg3VEFpHit4P',
+    posthogHost: 'https://eu.i.posthog.com',
   },
 
   /** Formularz newslettera: endpoint zapisu do Brevo (projekt Vercel w katalogu api/).

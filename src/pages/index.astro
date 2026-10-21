@@ -7,7 +7,7 @@ import Newsletter from '../components/Newsletter.astro';
 import PlayIcon from '../components/PlayIcon.astro';
 import Avatar from '../components/Avatar.astro';
 import { site } from '../data/site';
-import { faqLd, organizationLd, personLd, podcastSeriesLd, websiteLd } from '../lib/seo';
+import { faqLd, organizationLd, personLd, plainTitle, podcastSeriesLd, websiteLd } from '../lib/seo';
 
 const all = await getCollection('episodes');
 const published = all
@@ -85,6 +85,8 @@ const jsonLd = [websiteLd(), organizationLd(), podcastSeriesLd(), ...site.hosts.
       id="najnowszy-odcinek"
       data-player
       data-duration={latestDurationSeconds}
+      data-player-episode={latest.id}
+      data-player-title={plainTitle(latest.data)}
     >
       <audio class="hidden" data-player-audio src={latest.data.audio.url || undefined} preload="metadata"></audio>
 

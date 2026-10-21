@@ -1,0 +1,42 @@
+---
+/**
+ * PostHog (EU Cloud) w trybie bez cookies.
+ *
+ * Co zbieramy: odsłony stron ($pageview) i uruchomienia odtwarzacza (`episode_play`, wysyłane z player.ts).
+ * Czego nie robimy: autocapture kliknięć, nagrywanie sesji, map ciepła, ankiet, profili osób.
+ * `persistence: 'memory'` — żaden identyfikator nie jest zapisywany w przeglądarce (ani cookie, ani localStorage),
+ * dzięki czemu strona nie potrzebuje banera zgody. Konsekwencja: PostHog nie rozpoznaje powracających osób,
+ * więc „unikalni użytkownicy” to w praktyce liczba wizyt. Odsłony i odtworzenia liczą się poprawnie.
+ *
+ * Konfiguracja klucza i hosta w src/data/site.ts (analytics). Pusty klucz albo tryb dev = skrypt nie jest renderowany.
+ * Każda zmiana zakresu zbieranych danych wymaga aktualizacji /polityka-prywatnosci/ (sekcje II, III, IV, VIII).
+ */
+import { site } from '../data/site';
+
+const { posthogKey, posthogHost } = site.analytics;
+const enabled = !!posthogKey && !import.meta.env.DEV;
+---
+
+{
+  enabled && (
+    <script is:inline define:vars={{ posthogKey, posthogHost }}>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init(posthogKey, {
+        api_host: posthogHost,
+        defaults: '2026-05-30',
+        // Tryb bez cookies i bez identyfikatorów w przeglądarce.
+        persistence: 'memory',
+        person_profiles: 'identified_only',
+        // Tylko odsłony + nasze własne zdarzenie episode_play.
+        autocapture: false,
+        capture_pageview: true,
+        capture_pageleave: false,
+        capture_performance: false,
+        disable_session_recording: true,
+        disable_surveys: true,
+        enable_heatmaps: false,
+        respect_dnt: true,
+      });
+    </script>
+  )
+}

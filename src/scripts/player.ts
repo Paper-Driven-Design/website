@@ -20,7 +20,18 @@
  *   data-player-target="main"  łączy rozdział spoza korzenia z <div data-player="main">
  *   data-player-chapter="…"   tytuł rozdziału do etykiety
  *   data-player-chapter-label  nazwa bieżącego rozdziału
+ *   data-player-episode="001"  slug odcinka — trafia do zdarzenia analitycznego `episode_play`
+ *   data-player-title="…"      tytuł odcinka do tego samego zdarzenia
+ *
+ * Analityka: przy pierwszym uruchomieniu prawdziwego dźwięku (nie w trybie symulacji) wysyłamy do PostHog
+ * jedno zdarzenie `episode_play` na załadowanie strony. Nic więcej: ani pozycji, ani czasu słuchania.
  */
+
+declare global {
+  interface Window {
+    posthog?: { capture: (event: string, properties?: Record<string, unknown>) => void };
+  }
+}
 
 function formatTime(total: number): string {
   const secs = Math.max(0, Math.floor(total));
@@ -59,6 +70,7 @@ function initPlayer(root: HTMLElement) {
   let duration = Number(root.dataset.duration ?? 0) || 0;
   let current = Number(root.dataset.start ?? 0) || 0;
   let playing = false;
+  let playTracked = false;
   let rate = 1;
   let timer: number | undefined;
 
@@ -159,7 +171,16 @@ function initPlayer(root: HTMLElement) {
       current = audio.currentTime;
       render();
     });
-    audio.addEventListener('play', () => setPlaying(true));
+    audio.addEventListener('play', () => {
+      setPlaying(true);
+      if (!playTracked) {
+        playTracked = true;
+        window.posthog?.capture('episode_play', {
+          episode: root.dataset.playerEpisode ?? null,
+          episode_title: root.dataset.playerTitle ?? null,
+        });
+      }
+    });
     audio.addEventListener('pause', () => setPlaying(false));
     audio.addEventListener('ended', () => setPlaying(false));
     if (volume) audio.volume = Number(volume.value) / 100;
@@ -215,3 +236,6 @@ function initPlayer(root: HTMLElement) {
 }
 
 document.querySelectorAll<HTMLElement>('[data-player]').forEach(initPlayer);
+
+// Plik musi być modułem, żeby `declare global` było dozwolone.
+export {};

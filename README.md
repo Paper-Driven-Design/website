@@ -1,7 +1,7 @@
 # Paper Driven Design — strona podcastu
 
 Astro 7 + Tailwind CSS 4. Strona statyczna: landing, strony odcinków, kanał podcastowy `/feed.xml`.
-Pliki audio i okładki leżą w S3 za CloudFrontem (Terraform w `../paper-driven-design-audio-infra`).
+Pliki audio i okładki leżą w S3 za CloudFrontem (Terraform w `../stitch_paper_driven_design_landing 3/paper-driven-design-audio-infra`).
 
 ## Uruchomienie
 
@@ -34,7 +34,7 @@ npm run preview
 
 1. Skopiuj `src/content/episodes/001.yaml` jako `002.yaml` i uzupełnij pola.
 2. Ustaw `status: published` (odcinki `upcoming` pokazują się tylko jako zapowiedź „kolejny odcinek”).
-3. Wgraj MP3 do S3: `../paper-driven-design-audio-infra/scripts/upload-episode.sh plik.mp3 002-slug`.
+3. Wgraj MP3 do S3: `../stitch_paper_driven_design_landing 3/paper-driven-design-audio-infra/scripts/upload-episode.sh plik.mp3 002-slug`.
    Skrypt wypisze URL i rozmiar w bajtach — wpisz je w `audio.url` i `audio.bytes` (to `length` w `<enclosure>`).
 4. Link do wersji wideo wpisz w `youtube` (pokazuje się jako przycisk na stronie odcinka, na landingu i w feedzie).
    Link do odcinka w Spotify wpisz w `spotify` (przycisk na stronie odcinka i na landingu).
@@ -79,3 +79,13 @@ Zasady, od których zależy, czy platformy dobrze odczytają odcinki:
 - `audio.bytes` musi zgadzać się z rozmiarem pliku (skrypt uploadu go wypisuje).
 - `guid` odcinka to URL jego strony (`/odcinki/<id>/`) — stały nawet po podmianie pliku audio.
 - Odcinek `000` ma `itunes:episodeType = trailer`, pozostałe `full`.
+
+## Analityka (PostHog)
+
+Konfiguracja w `src/data/site.ts` → `analytics` (klucz projektu i host `https://eu.i.posthog.com`, czyli PostHog EU Cloud we Frankfurcie). Pusty klucz albo `npm run dev` = skrypt nie jest renderowany.
+
+Zbieramy tylko dwie rzeczy: odsłony stron (`$pageview`) i uruchomienia odtwarzacza (zdarzenie `episode_play` z polami `episode`, `episode_title`, wysyłane raz na załadowanie strony z `src/scripts/player.ts`). Skrypt działa w trybie bez cookies (`persistence: 'memory'`), bez autocapture, nagrywania sesji, map ciepła i ankiet, i respektuje Do Not Track. Dzięki temu strona nie potrzebuje banera zgody. Konsekwencja: PostHog nie rozpoznaje powracających osób, więc „unikalni użytkownicy” to w praktyce liczba wizyt.
+
+W projekcie PostHog włącz **Discard client IP data** (Settings → Project → Data management), bo polityka prywatności obiecuje, że IP nie jest zapisywany ze zdarzeniem.
+
+Każda zmiana zakresu zbieranych danych wymaga aktualizacji `/polityka-prywatnosci/` (sekcje II, III, IV, V, VI, VIII) i daty `legal.policyUpdated`.
