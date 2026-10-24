@@ -1,0 +1,175 @@
+---
+/**
+ * Backoffice: narzędzia dla prowadzących. Strona nie jest linkowana, ma noindex,
+ * jest wykluczona z sitemapy i zablokowana w robots.txt. To nie jest zabezpieczenie,
+ * tylko ukrycie przed wyszukiwarkami: kto zna adres, wejdzie.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../data/site';
+
+const episodes = await getCollection('episodes');
+const upcoming = episodes.filter((e) => e.data.status === 'upcoming').sort((a, b) => a.data.number - b.data.number)[0];
+const lastNumber = Math.max(0, ...episodes.filter((e) => e.data.status === 'published').map((e) => e.data.number));
+const nextNumber = upcoming ? upcoming.data.number : lastNumber + 1;
+const nextTitle = upcoming?.data.title ?? '';
+const [kamil, artur] = site.hosts;
+
+const intro = {
+  audio: '/backoffice/intro/clean-code-clear-calls.mp3',
+  audioLabel: 'Clean Code, Clear Calls',
+  photoH1: '/backoffice/intro/kamil.jpg',
+  photoH2: '/backoffice/intro/artur.jpg',
+};
+---
+
+<BaseLayout title={`Backoffice | ${site.name}`} description="Narzędzia prowadzących Paper Driven Design." noindex>
+  <section class="container-site py-12 lg:py-16">
+    <header class="flex flex-wrap items-end justify-between gap-4 pb-6 mb-8 border-b border-hairline">
+      <div>
+        <span class="meta-tag text-flight block mb-3">BACKOFFICE · NARZĘDZIE</span>
+        <h1 class="font-display-hero text-[48px] sm:text-[64px] text-ink">GENERATOR INTRA</h1>
+      </div>
+      <p class="meta-tag text-ink-muted max-w-sm">Plik MP4 (H.264 + AAC) powstaje w przeglądarce. Nic nie wychodzi z komputera.</p>
+    </header>
+
+    <div
+      id="intro-generator"
+      class="gen"
+      data-audio={intro.audio}
+      data-photo-h1={intro.photoH1}
+      data-photo-h2={intro.photoH2}
+    >
+      <form class="gen-form" id="form" onsubmit="return false">
+        <fieldset>
+          <legend class="meta-tag">Odcinek</legend>
+          <div class="row">
+            <label>Numer <input type="number" id="num" min="0" max="999" value={nextNumber} /></label>
+            <label>Data <input type="text" id="date" value="" placeholder="DD.MM.RRRR" /></label>
+          </div>
+          <label>
+            Tytuł <span class="hint">Najlepiej do 40 znaków. Zamieni się na wersaliki.</span>
+            <textarea id="title" placeholder="np. Event Storming w zespole rozproszonym">{nextTitle}</textarea>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend class="meta-tag">Prowadzący</legend>
+          <p class="hint">Zdjęcia są już wgrane. Wybierz plik tylko wtedy, gdy chcesz je podmienić; wyczyszczenie pola przywraca domyślne.</p>
+          <div class="row">
+            <label>Imię i nazwisko <input type="text" id="h1name" value={kamil.name} /></label>
+            <label>Rola <input type="text" id="h1role" value="Prowadzący" /></label>
+          </div>
+          <label class="file">
+            <img src={intro.photoH1} alt="" width="44" height="44" loading="lazy" />
+            <span>Zdjęcie: {kamil.name} <input type="file" id="h1photo" accept="image/*" /></span>
+          </label>
+          <div class="row">
+            <label>Imię i nazwisko <input type="text" id="h2name" value={artur.name} /></label>
+            <label>Rola <input type="text" id="h2role" value="Prowadzący" /></label>
+          </div>
+          <label class="file">
+            <img src={intro.photoH2} alt="" width="44" height="44" loading="lazy" />
+            <span>Zdjęcie: {artur.name} <input type="file" id="h2photo" accept="image/*" /></span>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend class="meta-tag">Gość (opcjonalnie)</legend>
+          <label class="check"><input type="checkbox" id="guestOn" /> Ten odcinek ma gościa</label>
+          <div class="row">
+            <label>Imię i nazwisko <input type="text" id="gname" placeholder="np. Anna Nowak" disabled /></label>
+            <label>Rola lub firma <input type="text" id="grole" placeholder="np. Staff Engineer, Acme" disabled /></label>
+          </div>
+          <label>Zdjęcie gościa <span class="hint">Portret z twarzą w górnej połowie kadru. Zostanie przycięte do kwadratu.</span>
+            <input type="file" id="gphoto" accept="image/*" disabled /></label>
+        </fieldset>
+
+        <fieldset>
+          <legend class="meta-tag">Wideo</legend>
+          <div class="row">
+            <label>Motyw
+              <select id="theme"><option value="night">Noc (YouTube)</option><option value="paper">Papier (social media)</option></select>
+            </label>
+            <label>Format
+              <select id="size">
+                <option value="1920x1080">1920 × 1080 (16:9)</option>
+                <option value="1280x720">1280 × 720 (16:9)</option>
+                <option value="3840x2160">3840 × 2160 (4K)</option>
+                <option value="1080x1920">1080 × 1920 (pion, shorts)</option>
+                <option value="1080x1080">1080 × 1080 (kwadrat)</option>
+              </select>
+            </label>
+          </div>
+          <div class="row">
+            <label>Klatki/s <select id="fps"><option>30</option><option selected>60</option><option>25</option></select></label>
+            <label>Długość (s) <input type="number" id="dur" min="10" max="30" step="0.5" value="14" /></label>
+          </div>
+          <label class="check"><input type="checkbox" id="fade" checked /> Wyciemnienie na końcu (0,5 s)</label>
+        </fieldset>
+
+        <fieldset>
+          <legend class="meta-tag">Dźwięk</legend>
+          <p class="hint">
+            Domyślnie dżingiel <strong>„{intro.audioLabel}”</strong> (<a class="underline" href={intro.audio}>odsłuchaj</a>).
+            Zostanie przycięty do długości intra i dostanie wyciszenie na końcu.
+          </p>
+          <label>Inny plik (MP3, WAV lub M4A) <input type="file" id="audio" accept="audio/*" /></label>
+          <label>Start dźwięku (s) <input type="number" id="aoff" min="0" max="10" step="0.1" value="0" /></label>
+        </fieldset>
+      </form>
+
+      <div class="gen-stage">
+        <canvas id="cv" width="1920" height="1080"></canvas>
+        <input class="scrub" type="range" id="scrub" min="0" max="14" step="0.01" value="5.2" aria-label="Pozycja na osi czasu" />
+        <div class="btns">
+          <button type="button" class="btn-secondary px-5 py-2.5" id="play">Odtwórz podgląd</button>
+          <button type="button" class="btn-secondary px-5 py-2.5" id="png">Zapisz klatkę PNG</button>
+          <button type="button" class="btn-flight px-5 py-2.5" id="render">Generuj MP4</button>
+          <a class="dl" id="dl" hidden>Pobierz MP4</a>
+        </div>
+        <div class="bar" aria-hidden="true"><div id="prog"></div></div>
+        <div class="status" id="status" role="status">Gotowe. Sprawdź dane po lewej, obejrzyj podgląd i kliknij „Generuj MP4”.</div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .gen { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; }
+  .gen-form { flex: 1 1 340px; max-width: 460px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+  .gen-stage { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px; position: sticky; top: 6rem; }
+  canvas { width: 100%; height: auto; display: block; border: 1px solid var(--color-hairline); border-radius: 6px; background: #000; }
+  /* min-width: 0 — fieldset ma domyślnie min-inline-size: min-content i input[type=file] rozpychałby kolumnę */
+  fieldset { min-width: 0; border: 1px solid var(--color-hairline); border-radius: 6px; padding: 14px 16px 16px; margin: 0; display: flex; flex-direction: column; gap: 14px; background: var(--color-card); }
+  legend { padding: 0 6px; color: var(--color-ink-muted); }
+  label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; }
+  .hint { font-weight: 400; color: var(--color-ink-muted); font-size: 13px; line-height: 1.5; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .row > label { flex: 1 1 120px; }
+  input[type='text'], input[type='number'], select, textarea {
+    font: inherit; font-weight: 400; font-size: 15px; padding: 10px 12px; border: 1px solid var(--color-control);
+    border-radius: 2px; background: var(--color-paper); color: var(--color-ink); min-height: 44px; width: 100%;
+  }
+  textarea { min-height: 72px; resize: vertical; }
+  input[type='file'] { font-weight: 400; font-size: 13px; max-width: 100%; }
+  .file { flex-direction: row; align-items: center; gap: 12px; }
+  .file img { width: 44px; height: 44px; object-fit: cover; border-radius: 2px; border: 1px solid var(--color-hairline); flex: none; }
+  .file span { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .check { flex-direction: row; align-items: center; gap: 10px; font-weight: 400; }
+  .check input { width: 18px; height: 18px; accent-color: var(--color-flight); }
+  :focus-visible { outline: 2px solid var(--color-flight-link); outline-offset: 2px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btns button[disabled] { opacity: 0.45; cursor: not-allowed; }
+  .dl { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 18px; border-radius: 2px; background: var(--color-ink); color: var(--color-paper); font-size: 14px; font-weight: 600; }
+  .bar { height: 6px; background: var(--color-hairline); border-radius: 3px; overflow: hidden; }
+  .bar > div { height: 100%; width: 0; background: var(--color-flight); transition: width 0.1s linear; }
+  .status { min-height: 24px; font-size: 14px; color: var(--color-ink-muted); }
+  .status.err { color: #b3261e; }
+  .scrub { width: 100%; accent-color: var(--color-flight); }
+  @media (max-width: 1023px) { .gen-stage { position: static; } }
+</style>
+
+<script>
+  import '../../scripts/intro-generator.js';
+</script>

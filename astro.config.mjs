@@ -10,8 +10,8 @@ export default defineConfig({
   trailingSlash: 'ignore',
   integrations: [
     sitemap({
-      // Do sitemapy trafiają tylko strony HTML (nie feed, llms.txt ani 404).
-      filter: (page) => !/\/404\/?$|\.(xml|txt)$/.test(page),
+      // Do sitemapy trafiają tylko strony HTML (nie feed, llms.txt, 404 ani /backoffice).
+      filter: (page) => !/\/(404|backoffice)(\/.*)?\/?$|\.(xml|txt)$/.test(page),
       changefreq: 'weekly',
       priority: 0.7,
     }),

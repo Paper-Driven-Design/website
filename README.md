@@ -29,6 +29,9 @@ npm run preview
 | `src/lib/seo.ts` | Dane strukturalne schema.org (PodcastSeries, PodcastEpisode, Person, FAQPage, okruszki) |
 | `src/pages/404.astro` | Strona błędu (GitHub Pages serwuje `404.html`) |
 | `src/scripts/player.ts` | Odtwarzacz audio (działa z plikiem MP3, a bez niego w trybie podglądu) |
+| `src/pages/backoffice/index.astro` | Backoffice: generator intra (`/backoffice/`), bez indeksowania |
+| `src/scripts/intro-generator.js`, `src/vendor/mp4-muxer.js` | Logika generatora (canvas + WebCodecs) i muxer MP4 |
+| `public/backoffice/intro/` | Zasoby generatora: dżingiel i zdjęcia prowadzących |
 
 ## Dodanie odcinka
 
@@ -66,6 +69,18 @@ Do zrobienia ręcznie:
 
 - Google Search Console: dodaj usługę dla `paperdriven.design`, kod z metody „tag HTML” wpisz w `site.seo.googleSiteVerification`, potem prześlij `https://paperdriven.design/sitemap-index.xml`. Analogicznie Bing Webmaster Tools (importuje z GSC).
 - Test danych strukturalnych: https://validator.schema.org/ i https://search.google.com/test/rich-results (wklej URL strony odcinka).
+
+## Backoffice: generator intra
+
+`/backoffice/` to strona dla prowadzących z generatorem intra wideo (ten sam kod co `../pdd-intro-generator.html`,
+osadzony w layoucie strony). Dżingiel „Clean Code, Clear Calls” i zdjęcia Kamila i Artura są wgrane na stałe
+(`public/backoffice/intro/`), pola plików pozwalają je jednorazowo podmienić. Numer odcinka podpowiada się sam
+(najbliższy `upcoming`, a gdy go nie ma, ostatni opublikowany + 1), data to dzień dzisiejszy.
+MP4 (H.264 + AAC) powstaje w przeglądarce przez WebCodecs: Chrome, Edge albo Safari 17+.
+
+Strona jest wyłączona z wyszukiwarek na trzy sposoby: `noindex, nofollow` w `<head>`, `Disallow: /backoffice`
+w `robots.txt` i filtr w `astro.config.mjs`, który nie wpuszcza jej do sitemapy. Nie jest nigdzie linkowana.
+To ukrycie, nie zabezpieczenie: kto zna adres, wejdzie.
 
 ## Kanał podcastowy
 
