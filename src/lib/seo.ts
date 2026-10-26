@@ -198,6 +198,15 @@ export function faqLd(faq: readonly { q: string; a: string }[]): JsonLd {
   };
 }
 
+/** Meta description: Google pokazuje ok. 155–160 znaków, dłuższe ucina w pół zdania. Tniemy na granicy słowa. */
+export function metaDescription(text: string, max = 158) {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max - 1);
+  const atWord = cut.lastIndexOf(' ');
+  return `${cut.slice(0, atWord > max * 0.6 ? atWord : cut.length).replace(/[\s,;:.]+$/, '')}…`;
+}
+
 /** Jeden <script type="application/ld+json"> z grafem — mniej duplikatów niż osobne skrypty. */
 export function jsonLdGraph(nodes: JsonLd[]) {
   return { '@context': 'https://schema.org', '@graph': nodes };

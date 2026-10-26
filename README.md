@@ -65,9 +65,28 @@ Co strona robi sama przy każdym buildzie:
 - `/llms.txt`: streszczenie podcastu, prowadzących, odcinków i FAQ w Markdownie (format llmstxt.org) dla ChatGPT, Claude, Perplexity.
 - Sekcja FAQ na landingu z `site.faq` — treść, którą asystenci AI cytują najchętniej; edytuj tam, schema i `llms.txt` zaktualizują się same.
 
+Sitemapa: `https://paperdriven.design/sitemap-index.xml` (wskazuje `sitemap-0.xml`). Każdy URL ma `lastmod`: odcinek = data publikacji,
+strona główna = data najnowszego odcinka, polityka = `legal.policyUpdatedIso`. Bez `/backoffice/`, feedów i 404.
+
+### Google Search Console krok po kroku
+
+1. Wejdź na https://search.google.com/search-console i kliknij „Dodaj usługę”.
+2. Wybierz typ usługi:
+   - **Domena** (`paperdriven.design`, zalecane: obejmuje http/https i subdomeny, w tym `api.`): Google poda rekord TXT,
+     dodaj go w panelu DNS domeny i kliknij „Zweryfikuj” (propagacja do kilkudziesięciu minut).
+   - **Prefiks URL** (`https://paperdriven.design/`): wybierz metodę „Tag HTML”, skopiuj samą wartość `content="..."`
+     i wpisz ją w `src/data/site.ts` → `seo.googleSiteVerification`. Push na `main`, poczekaj na deploy (ok. 1–2 min),
+     dopiero potem kliknij „Zweryfikuj”. Tag zostaje w kodzie na stałe, bo Google okresowo sprawdza go ponownie.
+3. Po weryfikacji: menu „Mapy witryn” → wpisz `sitemap-index.xml` → „Prześlij”. Stan powinien zmienić się na „Powodzenie”
+   z liczbą wykrytych adresów równą liczbie stron (strona główna + odcinki + polityka).
+4. „Sprawdzanie adresu URL” → wklej `https://paperdriven.design/` → „Poproś o zindeksowanie”. Powtórz dla najnowszego odcinka.
+   Indeksowanie nowej domeny trwa zwykle od kilku dni do 2–3 tygodni.
+5. Po kilku dniach zajrzyj do „Strony” (indeksowanie) i „Ulepszenia” (okruszki, filmy). Błędy danych strukturalnych pokaże też
+   https://search.google.com/test/rich-results.
+6. Bing Webmaster Tools (https://www.bing.com/webmasters) ma opcję importu usługi z Search Console, bez osobnej weryfikacji.
+
 Do zrobienia ręcznie:
 
-- Google Search Console: dodaj usługę dla `paperdriven.design`, kod z metody „tag HTML” wpisz w `site.seo.googleSiteVerification`, potem prześlij `https://paperdriven.design/sitemap-index.xml`. Analogicznie Bing Webmaster Tools (importuje z GSC).
 - Test danych strukturalnych: https://validator.schema.org/ i https://search.google.com/test/rich-results (wklej URL strony odcinka).
 
 ## Backoffice: generator intra

@@ -53,7 +53,7 @@ const resourceAccent = {
 
 const titleText = plainTitle(data);
 const pageTitle = `${titleText} | Odcinek ${number} | ${site.name}`;
-const pageDescription = `Odcinek ${number} podcastu ${site.name} (${data.duration}). ${data.summary.replace(/\s+/g, ' ').trim()}`;
+const pageDescription = `${data.summary.replace(/\s+/g, ' ').trim()} Odcinek ${number} podcastu ${site.name}, ${data.duration}.`;
 const jsonLd = [
   organizationLd(),
   podcastSeriesLd(),

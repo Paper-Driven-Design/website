@@ -31,7 +31,7 @@ const episodeCountLabel = String(published.length).padStart(2, '0');
 const jsonLd = [websiteLd(), organizationLd(), podcastSeriesLd(), ...site.hosts.map(personLd), faqLd(site.faq)];
 ---
 
-<BaseLayout jsonLd={jsonLd}>
+<BaseLayout description={site.seo.homeDescription} jsonLd={jsonLd}>
   <!-- HERO -->
   <section class="container-site pt-16 pb-20">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">

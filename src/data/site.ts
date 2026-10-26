@@ -5,7 +5,8 @@
 export const site = {
   name: 'Paper Driven Design',
   tagline: 'Polski Podcast Architektury i Projektowania Systemów',
-  title: 'Paper Driven Design — Polski Podcast Architektury i Projektowania Systemów',
+  /** <title> strony głównej. Google pokazuje ok. 60 znaków, dłuższe ucina. */
+  title: 'Paper Driven Design — podcast o architekturze oprogramowania',
   description:
     'Podcast o architekturze oprogramowania, Event Stormingu, modelowaniu domeny i miękkich kompetencjach technicznych liderów. Zrozumienie na papierze, spokój na produkcji.',
   url: 'https://paperdriven.design',
@@ -21,12 +22,16 @@ export const site = {
     /** Adres do spraw danych osobowych — publiczny na stronie polityki. UZUPEŁNIJ przed publikacją. */
     contactEmail: 'kamil@linecode.pl',
     policyUpdated: '21 października 2026',
+    /** Ta sama data w ISO — <lastmod> polityki w sitemapie. Zmieniaj obie razem. */
+    policyUpdatedIso: '2026-10-21',
     policyPath: '/polityka-prywatnosci/',
   },
 
   /** SEO: kod weryfikacyjny Google Search Console (meta google-site-verification). Pusty = tag pominięty. */
   seo: {
     googleSiteVerification: '',
+    /** Meta description strony głównej (do 158 znaków). `site.description` jest dłuższy i służy jako lead w hero. */
+    homeDescription: 'Polski podcast o architekturze oprogramowania: DDD, Event Storming, decyzje architektoniczne i AI w pracy architekta. Prowadzą Kamil Kiełbasa i Artur Wojnar.',
   },
 
   /** Analityka: PostHog (EU Cloud, Frankfurt). Pusty klucz = analityka wyłączona.
