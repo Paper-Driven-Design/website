@@ -99,7 +99,7 @@ Artur Wojnar — solutions architect, konsultant i prelegent. Pragmatyk projekto
 
   platforms: [
     { label: 'Spotify', href: 'https://open.spotify.com/show/7wi5404ErNrFIvkafCVbLN' },
-    { label: 'Apple Podcasts', href: '#', comingSoon: true }, // po zatwierdzeniu feedu wpisz link i usuń comingSoon
+    { label: 'Apple Podcasts', href: 'https://podcasts.apple.com/us/podcast/paper-driven-design/id6827512045' },
     { label: 'YouTube', href: 'https://www.youtube.com/@PaperDrivenDesign' },
     { label: 'RSS', href: '/feed.xml' },
   ],
@@ -147,7 +147,7 @@ Artur Wojnar — solutions architect, konsultant i prelegent. Pragmatyk projekto
     },
     {
       q: 'Gdzie można słuchać Paper Driven Design?',
-      a: 'Na Spotify, na YouTube (wersja wideo) i bezpośrednio na tej stronie. Kanał RSS https://paperdriven.design/feed.xml działa w każdej aplikacji podcastowej. Apple Podcasts wkrótce.',
+      a: 'Na Spotify, w Apple Podcasts, na YouTube (wersja wideo) i bezpośrednio na tej stronie. Kanał RSS https://paperdriven.design/feed.xml działa w każdej aplikacji podcastowej.',
     },
     {
       q: 'Jak często pojawiają się nowe odcinki?',

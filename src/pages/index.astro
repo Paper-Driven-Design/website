@@ -149,6 +149,9 @@ const jsonLd = [websiteLd(), organizationLd(), podcastSeriesLd(), ...site.hosts.
             {latest.data.spotify && (
               <a class="hover:text-ink bg-black/5 px-3 py-1 rounded-full" href={latest.data.spotify} target="_blank" rel="noopener noreferrer">SŁUCHAJ W SPOTIFY</a>
             )}
+            {latest.data.apple && (
+              <a class="hover:text-ink bg-black/5 px-3 py-1 rounded-full" href={latest.data.apple} target="_blank" rel="noopener noreferrer">SŁUCHAJ W APPLE PODCASTS</a>
+            )}
             {latest.data.youtube && (
               <a class="hover:text-ink bg-black/5 px-3 py-1 rounded-full" href={latest.data.youtube} target="_blank" rel="noopener noreferrer">OBEJRZYJ NA YOUTUBE</a>
             )}

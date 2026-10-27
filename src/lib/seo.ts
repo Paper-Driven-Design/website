@@ -171,7 +171,7 @@ export function podcastEpisodeLd(episode: Episode): JsonLd {
     ...(media.length ? { associatedMedia: media } : {}),
     ...(chapters.length ? { hasPart: chapters } : {}),
     ...(transcript ? { transcript } : {}),
-    sameAs: [data.spotify, data.youtube].filter(Boolean),
+    sameAs: [data.spotify, data.apple, data.youtube].filter(Boolean),
   };
 }
 

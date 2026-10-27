@@ -35,10 +35,10 @@ export async function GET(context: APIContext) {
       const link = `${base}/odcinki/${id}/`;
       const number = String(data.number).padStart(3, '0');
       const description = data.description ?? data.lead ?? data.summary;
-      // Tytuły w YAML są wersalikami (typografia strony); do feedu bierzemy shortTitle
-      // ("PDD #001 — Czy kod to już commodity?") i z niego zwykłą pisownię tytułu.
-      const plainTitle = data.shortTitle?.split(' — ')[1]?.trim() || data.title;
-      const feedTitle = `#${number} ${plainTitle}`;
+      // Tytuły w YAML są wersalikami (typografia strony). W feedzie odcinek nazywa się tak jak na stronie:
+      // shortTitle ("PDD #001 — Czy kod to już commodity?"), a bez niego "PDD #001 — TYTUŁ". Ten sam tekst idzie
+      // do <title> (Spotify, czytniki RSS) i <itunes:title> (Apple pokazuje go zamiast <title>).
+      const feedTitle = data.shortTitle?.trim() || `PDD #${number} — ${data.title}`;
       const html = `<p>${esc(description)}</p>${
         data.chapters.length
           ? `<p>Rozdziały:</p><ul>${data.chapters.map((c) => `<li>${esc(c.time)} — ${esc(c.title)}</li>`).join('')}</ul>`
@@ -55,7 +55,7 @@ export async function GET(context: APIContext) {
       <description>${cdata(description)}</description>
       <content:encoded>${cdata(html)}</content:encoded>
       <enclosure url="${esc(data.audio.url!)}" length="${data.audio.bytes ?? 0}" type="audio/mpeg"/>
-      <itunes:title>${esc(plainTitle)}</itunes:title>
+      <itunes:title>${esc(feedTitle)}</itunes:title>
       <itunes:summary>${esc(data.summary)}</itunes:summary>
       <itunes:duration>${toSeconds(data.duration)}</itunes:duration>
       <itunes:episode>${data.number}</itunes:episode>

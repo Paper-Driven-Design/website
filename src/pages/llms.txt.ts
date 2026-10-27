@@ -28,6 +28,7 @@ export async function GET(context: APIContext) {
       `czas ${data.duration}`,
       data.youtube && `YouTube: ${data.youtube}`,
       data.spotify && `Spotify: ${data.spotify}`,
+      data.apple && `Apple Podcasts: ${data.apple}`,
       data.audio.url && `MP3: ${data.audio.url}`,
     ]
       .filter(Boolean)

@@ -259,6 +259,14 @@ const jsonLd = [
                   )
                 }
                 {
+                  data.apple && (
+                    <a class="pill-action" href={data.apple} target="_blank" rel="noopener noreferrer">
+                      <span class="material-symbols-outlined text-[18px]">podcasts</span>
+                      <span>Słuchaj w Apple Podcasts</span>
+                    </a>
+                  )
+                }
+                {
                   data.youtube && (
                     <a class="pill-action" href={data.youtube} target="_blank" rel="noopener noreferrer">
                       <span class="material-symbols-outlined text-[18px]">smart_display</span>
