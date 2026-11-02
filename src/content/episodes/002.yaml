@@ -1,0 +1,187 @@
+number: 2
+season: 1
+title: "SKILL ISSUES W SERVERLESS"
+shortTitle: "PDD #002 — Skill Issues w Serverless"
+status: published
+badge: "NAJNOWSZY"
+date: 2026-11-02T09:00:00.000Z
+dateLabel: "2 listopada 2026"
+monthLabel: "LISTOPAD 2026"
+duration: "37:48"
+durationMinutes: 38
+
+summary: >-
+  Serverless miał zdjąć z nas serwery, patche i skalowanie. Opowiadamy, co w praktyce
+  poszło nie tak: cold start, DynamoDB używane jak baza relacyjna, kolejki bez Dead Letter
+  Queue i Lambda pinball. I dlaczego Lambda to architektura wdrożenia, nie oprogramowania.
+
+lead: >-
+  Serverless miał zdjąć z nas serwery, patche i skalowanie. Artur opowiada z perspektywy
+  audytora, który wchodzi w poobijane projekty na AWS, Kamil jako twórca systemu zbudowanego
+  w całości na Lambdach. Dziś narzekamy, ale z miłością: AWS i Lambdy są świetne, jeśli
+  wiesz, do czego ich używasz.
+
+description: >-
+  Zaczynamy od definicji z książki „Serverless Architectures on AWS” (płacisz tylko wtedy,
+  gdy używasz) i plusów: nikt nie patchuje serwerów, jest SLA, a bezpieczeństwo usługi
+  zarządzanej bije Kubernetesa na bare metal. Potem lista bólu: cold start w .NET i fakt, że
+  od sierpnia 2025 AWS dolicza czas inicjalizacji Lambdy do rachunku; DynamoDB używane jak
+  baza relacyjna; 50 funkcji z jednej DLL-ki i okno rozsynchronizowania przy deployu; SQS bez
+  Dead Letter Queue i ETL-e, które nie przeżywają trzygodzinnej awarii Redshifta; Lambda
+  pinball, czyli proces przechodzący przez 50 funkcji, kolejek i bucketów. Do tego prawo
+  Teslera (złożoność nie znika, tylko przenosi się z serwerów do integracji), Lambda layers ze
+  „shared kernelem” prowadzące do Distributed Big Ball of Mud i mikroserwis, który tylko
+  kapitalizuje stringa. Teza odcinka: Lambda to architektura wdrożenia, nie architektura
+  oprogramowania. Zasady projektowania się nie zmieniły.
+
+tags:
+  - CHMURA
+  - ARCHITEKTURA
+
+topics:
+  - SERVERLESS
+  - AWS LAMBDA
+  - DYNAMODB
+  - ZŁOŻONOŚĆ
+
+audio:
+  url: "https://d3057vo2xyrx9j.cloudfront.net/episodes/002-skill-issues-w-serverless.mp3"
+  bytes: 36300457
+  size: "35 MB"
+  quality: "128 kbps"
+
+youtube: "https://youtu.be/r0QYfwCmvO8"
+image: "https://d3057vo2xyrx9j.cloudfront.net/images/episodes/002-skill-issues-w-serverless-3000x3000.jpg"
+
+chapters:
+  - { time: "00:00", seconds: 0, title: "Serverless: dziś narzekamy, z miłością" }
+  - { time: "01:01", seconds: 61, title: "Czym jest serverless? Definicja z „Serverless Architectures on AWS”" }
+  - { time: "02:34", seconds: 154, title: "Plusy: nikt nie patchuje serwerów, SLA i bezpieczeństwo" }
+  - { time: "04:36", seconds: 276, title: "Cold start: .NET, JIT i Lambda, która wstaje półtorej sekundy" }
+  - { time: "06:12", seconds: 372, title: "Od sierpnia 2025 AWS dolicza inicjalizację Lambdy do rachunku" }
+  - { time: "08:39", seconds: 519, title: "Haki na ciepłą Lambdę: CloudWatch co 30 s, Native AOT i brak refleksji" }
+  - { time: "10:12", seconds: 612, title: "DynamoDB w audytach: partycje, hashowanie i wzorce dostępu" }
+  - { time: "12:48", seconds: 768, title: "DynamoDB to nie baza relacyjna ani OLAP" }
+  - { time: "14:11", seconds: 851, title: "re:Invent o modelowaniu w DynamoDB. Skill issue, nie problem narzędzia" }
+  - { time: "16:19", seconds: 979, title: "50 funkcji z jednej DLL-ki: okno rozsynchronizowania i wersjonowanie kontraktów" }
+  - { time: "17:36", seconds: 1056, title: "Odporność: SQS bez Dead Letter Queue, redrive policy i brak alarmów" }
+  - { time: "20:09", seconds: 1209, title: "ETL-e i pytanie: co, jeśli docelowy serwis leży 3 godziny?" }
+  - { time: "22:42", seconds: 1362, title: "Lambda pinball: 100 funkcji, SQS, S3 i debugowanie przez 50 Lambd" }
+  - { time: "24:13", seconds: 1453, title: "Cykliczne zależności i rosnący koszt integracji" }
+  - { time: "25:28", seconds: 1528, title: "Nawiązanie do odcinka 001: złożoność przeniosła się do integracji" }
+  - { time: "26:39", seconds: 1599, title: "Prawo Teslera: zachowanie złożoności i Brooks" }
+  - { time: "28:07", seconds: 1687, title: "Lambda jako „architektura”, layers ze shared kernelem i Distributed Big Ball of Mud" }
+  - { time: "29:20", seconds: 1760, title: "Mikroserwis, który tylko kapitalizuje stringa" }
+  - { time: "30:06", seconds: 1806, title: "Lambda to architektura wdrożenia, nie architektura oprogramowania" }
+  - { time: "31:29", seconds: 1889, title: "Dobrze użyta Lambda: trigger z DynamoDB Streams jako start ETL-a" }
+  - { time: "32:57", seconds: 1977, title: "Raport CNCF: FaaS po boomie, organizacje mieszają Lambdy i kontenery" }
+  - { time: "34:02", seconds: 2042, title: "Serverless miał zjeść PaaS i IaaS. Buzzwordy, AI i dojrzałość technologii" }
+  - { time: "35:55", seconds: 2155, title: "Co jeszcze przed nami: skalowalność Lambd, DynamoDB, Kinesis" }
+
+takeaways:
+  - title: "Cold start to jedyny problem z natury serverlessa"
+    text: "Reszta listy to skill issue: DynamoDB używane jak baza relacyjna, kolejki bez DLQ, brak alarmów. Trzeba znać narzędzie, zanim wprowadzi się je w organizacji."
+  - title: "DynamoDB wymaga modelowania pod wzorce dostępu"
+    text: "Partycje, hashowanie i router decydują, gdzie trafia zapytanie. Bez modelowania up front powstają gigantyczne tabele i frustracja, choć baza robi dokładnie to, do czego ją zaprojektowano."
+  - title: "Złożoność nie znika, tylko się przenosi"
+    text: "Prawo Teslera i Brooks: wyciągnęliśmy złożoność z zarządzania serwerami i wsadziliśmy ją w integrację między Lambdami, kolejkami i bucketami. Im więcej ruchomych elementów, tym więcej miejsc, gdzie giną dane."
+  - title: "Lambda to architektura wdrożenia, nie oprogramowania"
+    text: "Użycie Lambd nie daje mikroserwisów. Layers ze „shared kernelem” prowadzą do Distributed Big Ball of Mud. Najpierw projektujemy i modelujemy, potem decydujemy, jak to wdrożyć."
+
+resources:
+  - kind: "Książka · 2022"
+    title: "Sbarski, Cui, Nair, „Serverless Architectures on AWS, Second Edition”"
+    text: "Stąd definicja z początku odcinka: serverless to oprogramowanie lub usługa, za którą płacisz tylko wtedy, gdy jej używasz."
+    cta: "O książce (Manning)"
+    href: "https://www.manning.com/books/serverless-architectures-on-aws-second-edition"
+    icon: "menu_book"
+    ctaIcon: "open_in_new"
+    accent: "primary"
+  - kind: "Ogłoszenie · 2025"
+    title: "AWS Lambda dolicza fazę INIT do czasu rozliczanego"
+    text: "Od 1 sierpnia 2025 cold start funkcji w managed runtime jest częścią rachunku. Dlatego ciepła Lambda zaczęła kosztować podwójnie: w opóźnieniu i w pieniądzach."
+    cta: "Czytaj na AWS Compute Blog"
+    href: "https://aws.amazon.com/blogs/compute/aws-lambda-standardizes-billing-for-init-phase/"
+    icon: "payments"
+    ctaIcon: "open_in_new"
+    accent: "tertiary"
+  - kind: "Dokumentacja · AWS"
+    title: ".NET Native AOT na AWS Lambda"
+    text: "Kompilacja do natywnej binarki zamiast JIT: krótszy cold start, ale bez refleksji i z bibliotekami, które nie zawsze to wytrzymują."
+    cta: "Czytaj dokumentację"
+    href: "https://docs.aws.amazon.com/lambda/latest/dg/dotnet-native-aot.html"
+    icon: "bolt"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Wideo · re:Invent 2018"
+    title: "Rick Houlihan, „Amazon DynamoDB Deep Dive: Advanced Design Patterns”"
+    text: "Seria wykładów, o której mówi Artur. Jak myśleć o partycjach, wzorcach dostępu i single-table design zamiast przenosić tabele relacyjne 1:1."
+    cta: "Oglądaj na YouTube"
+    href: "https://www.youtube.com/watch?v=HaEPXoXVf2k"
+    icon: "play_circle"
+    ctaIcon: "open_in_new"
+    accent: "primary"
+  - kind: "Dokumentacja · AWS"
+    title: "DynamoDB: najlepsze praktyki projektowania NoSQL"
+    text: "Najpierw wzorce dostępu, potem model danych. Oficjalny punkt startu, zanim zespół wrzuci do DynamoDB swoje tabelki relacyjne."
+    cta: "Czytaj dokumentację"
+    href: "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html"
+    icon: "database"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Dokumentacja · AWS"
+    title: "Amazon SQS: dead-letter queues i redrive policy"
+    text: "DLQ nie jest domyślnie włączone. Bez redrive policy po nieudanych próbach dostarczenia wiadomość po prostu ginie."
+    cta: "Czytaj dokumentację"
+    href: "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html"
+    icon: "move_to_inbox"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Dokumentacja · AWS"
+    title: "DynamoDB Streams jako trigger Lambdy"
+    text: "Przykład dobrze użytej Lambdy z odcinka: funkcja reagująca na zmiany w tabeli jako początek procesu ETL."
+    cta: "Czytaj dokumentację"
+    href: "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.Lambda.html"
+    icon: "stream"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Technology Radar · 2019"
+    title: "Thoughtworks, „Lambda pinball” (Hold)"
+    text: "Antywzorzec nazwany po imieniu: żądania odbijają się między Lambdami, bucketami i kolejkami, a logika domenowa znika z pola widzenia."
+    cta: "Czytaj na thoughtworks.com"
+    href: "https://www.thoughtworks.com/radar/techniques/lambda-pinball"
+    icon: "radar"
+    ctaIcon: "open_in_new"
+    accent: "tertiary"
+  - kind: "Prawo · UX"
+    title: "Prawo Teslera, czyli prawo zachowania złożoności"
+    text: "Każdy system ma nieredukowalny poziom złożoności. Można ją tylko przenieść: z serwerów do integracji, z kodu do użytkownika."
+    cta: "Czytaj na lawsofux.com"
+    href: "https://lawsofux.com/teslers-law/"
+    icon: "balance"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Esej · 1986"
+    title: "Fred Brooks, „No Silver Bullet”"
+    text: "Złożoność esencjonalna i przypadkowa. Wracamy do niej, bo serverless głównie przestawia złożoność przypadkową w inne miejsce."
+    cta: "Czytaj PDF"
+    href: "https://techreports.cs.unc.edu/papers/86-020.pdf"
+    icon: "description"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Esej · 1997"
+    title: "Foote & Yoder, „Big Ball of Mud”"
+    text: "Oryginał, od którego pochodzi „Distributed Big Ball of Mud”. Lambda layers ze wspólnym kernelem to jego chmurowa wersja."
+    cta: "Czytaj"
+    href: "http://www.laputan.org/mud/"
+    icon: "description"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Raport · 2023"
+    title: "CNCF Annual Survey 2023"
+    text: "Raport, o którym mówimy pod koniec: po początkowym boomie użycie FaaS maleje, a organizacje mieszają funkcje z kontenerami zależnie od przypadku."
+    cta: "Czytaj raport"
+    href: "https://www.cncf.io/reports/cncf-annual-survey-2023/"
+    icon: "monitoring"
+    ctaIcon: "open_in_new"
+    accent: "tertiary"
