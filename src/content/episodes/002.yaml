@@ -1,7 +1,7 @@
 number: 2
 season: 1
-title: "SERVERLESS: CO POSZŁO NIE TAK?"
-shortTitle: "PDD #002 — Serverless: co poszło nie tak?"
+title: "SKILL ISSUES W SERVERLESS"
+shortTitle: "PDD #002 — Skill Issues w Serverless"
 status: published
 badge: "NAJNOWSZY"
 date: 2026-11-02T09:00:00.000Z
@@ -45,13 +45,13 @@ topics:
   - ZŁOŻONOŚĆ
 
 audio:
-  url: "https://d3057vo2xyrx9j.cloudfront.net/episodes/002-serverless-co-poszlo-nie-tak.mp3"
+  url: "https://d3057vo2xyrx9j.cloudfront.net/episodes/002-skill-issues-w-serverless.mp3"
   bytes: 36300457
   size: "35 MB"
   quality: "128 kbps"
 
 youtube: "https://youtu.be/r0QYfwCmvO8"
-image: "https://d3057vo2xyrx9j.cloudfront.net/images/episodes/002-serverless-co-poszlo-nie-tak-3000x3000.jpg"
+image: "https://d3057vo2xyrx9j.cloudfront.net/images/episodes/002-skill-issues-w-serverless-3000x3000.jpg"
 
 chapters:
   - { time: "00:00", seconds: 0, title: "Serverless: dziś narzekamy, z miłością" }
