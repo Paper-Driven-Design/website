@@ -1,0 +1,145 @@
+number: 3
+season: 1
+title: "PO CO NAM MAPY MOŻLIWOŚCI BIZNESOWYCH?"
+shortTitle: "PDD #003 — Po co nam mapy możliwości biznesowych?"
+status: published
+badge: "NAJNOWSZY"
+date: 2026-11-16T09:00:00.000Z
+dateLabel: "16 listopada 2026"
+monthLabel: "LISTOPAD 2026"
+duration: "37:21"
+durationMinutes: 37
+
+summary: >-
+  W jakim miejscu jest biznes i gdzie zacząć techniczne modelowanie domeny? Odpowiedź na oba
+  pytania jest jedna: mapy możliwości biznesowych. Rozkładamy je na przykładach McDonald's,
+  platformy VOD, Netflixa i Ubera i pokazujemy, co z nich mają programiści i architekci.
+
+lead: >-
+  W jakim miejscu jest biznes i gdzie zacząć techniczne modelowanie domeny? Okazuje się, że
+  odpowiedź na te dwa pytania jest jedna: mapy możliwości biznesowych. To temat, który brzmi
+  jak rozmowa C-levelu, przy której deweloperzy ziewają, a w praktyce jest najstabilniejszym
+  punktem zaczepienia dla modelu domenowego.
+
+description: >-
+  Zaczynamy od definicji: capability to to, co biznes robi u swoich podstaw (William Ulrich),
+  a według BIZBOK konkretna zdolność, którą biznes może posiadać lub wymienić, żeby osiągnąć
+  określony cel. Potem przykłady: Ray Kroc i McDonald's, który stoi na nieruchomościach i
+  franczyzie, a nie na burgerach; platforma VOD, w której streaming jest domeną wspierającą,
+  a o przewadze decyduje zakup i produkcja treści; Netflix, który capability tworzenia
+  materiałów po prostu kupił razem ze studiami filmowymi. Modelujemy wymaganie „podcasty na
+  platformie VOD w tydzień”: film, podcast i serial jako „materiał” ze ścieżkami audio i
+  wideo, struktury wielkiej skali z Domain-Driven Design i klasa Podcast dziedzicząca po
+  Video jako przykład, jak tego nie robić. Do tego capability jako heurystyka do odkrywania
+  bounded contextów (nie mapowanie jeden do jednego), Uber i archetyp dostępności, poziomy
+  dojrzałości capabilities w rozmowie z biznesem, capabilities strategiczne i mapy Wardleya.
+  Na koniec zagadka: trzy capabilities z prawdziwego projektu i pytanie, jaka to branża.
+
+tags:
+  - ARCHITEKTURA
+  - DDD
+
+topics:
+  - BUSINESS CAPABILITIES
+  - MODELOWANIE DOMENY
+  - DDD
+  - MAPY WARDLEYA
+
+audio:
+  url: "https://d3057vo2xyrx9j.cloudfront.net/episodes/003-po-co-nam-mapy-mozliwosci-biznesowych.mp3"
+  bytes: 35857700
+  size: "34 MB"
+  quality: "128 kbps"
+
+youtube: "https://youtu.be/MwRmyPvTJ0k"
+image: "https://d3057vo2xyrx9j.cloudfront.net/images/episodes/003-po-co-nam-mapy-mozliwosci-biznesowych-3000x3000.jpg"
+
+chapters:
+  - { time: "00:00", seconds: 0, title: "Dwa pytania, jedna odpowiedź: mapy możliwości biznesowych" }
+  - { time: "01:09", seconds: 69, title: "Narzędzie do analizy, nie do zbierania danych jak Big Picture Event Storming" }
+  - { time: "02:06", seconds: 126, title: "Czym jest capability? Definicje Williama Ulricha i BIZBOK" }
+  - { time: "03:42", seconds: 222, title: "IT jako jedno z capabilities: uwierzytelnianie kodem albo dowodem osobistym" }
+  - { time: "05:02", seconds: 302, title: "Dla deweloperów: Ray Kroc, McDonald's, nieruchomości i franczyza" }
+  - { time: "06:59", seconds: 419, title: "Aplikacja Żabki to nie przewaga rynkowa. Technologia rzadko nią jest" }
+  - { time: "07:18", seconds: 438, title: "VOD: czy streaming to domena główna, czy wspierająca?" }
+  - { time: "09:10", seconds: 550, title: "Warner Bros, HBO Max i dostęp do milionów użytkowników" }
+  - { time: "09:35", seconds: 575, title: "Capabilities platformy VOD: strumieniowanie i zakup materiałów" }
+  - { time: "10:53", seconds: 653, title: "Netflix: capability tworzenia treści kupione razem ze studiami filmowymi" }
+  - { time: "12:51", seconds: 771, title: "Microsoft: wiele modeli biznesowych, wspólne capabilities" }
+  - { time: "14:00", seconds: 840, title: "Biznes chce podcastów na platformie VOD w tydzień" }
+  - { time: "15:43", seconds: 943, title: "Kolizja językowa: film i podcast jako „materiał” ze ścieżkami audio i wideo" }
+  - { time: "16:47", seconds: 1007, title: "Dygresja: nasz cel w wyświetleniach i planowanie dywersyfikacji" }
+  - { time: "17:27", seconds: 1047, title: "Dopasowany model domenowy: nowe wymaganie to jeden if" }
+  - { time: "18:14", seconds: 1094, title: "Podcast extends Video, czyli jak tego nie modelować" }
+  - { time: "18:58", seconds: 1138, title: "Serial a film: struktury wielkiej skali i warstwa operacyjna" }
+  - { time: "21:14", seconds: 1274, title: "Capability to heurystyka do bounded contextów, nie mapowanie 1:1" }
+  - { time: "22:19", seconds: 1339, title: "Po co to programistom: najstabilniejsze miejsce w biznesie" }
+  - { time: "23:22", seconds: 1402, title: "Granice semantyczne: film i produkt znaczą co innego w różnych kontekstach" }
+  - { time: "24:14", seconds: 1454, title: "Uber: capabilities na start i archetyp dostępności" }
+  - { time: "25:51", seconds: 1551, title: "Poziomy dojrzałości capabilities i rozmowa z biznesem" }
+  - { time: "27:47", seconds: 1667, title: "Soczewki: capabilities strategiczne, Uber Eats i pojazdy autonomiczne" }
+  - { time: "29:20", seconds: 1760, title: "Mapy Wardleya: genesis, custom, product, commodity" }
+  - { time: "30:31", seconds: 1831, title: "Dużo po prawej stronie mapy: problem czy specyfika biznesu?" }
+  - { time: "31:39", seconds: 1899, title: "Zagadka: planowanie zadań, scoring, raportowanie. Jaka to branża?" }
+  - { time: "34:26", seconds: 2066, title: "Odpowiedź: healthcare. Efekt torowania w praktyce" }
+  - { time: "35:27", seconds: 2127, title: "Podsumowanie i co dalej: AI i value streamy" }
+
+takeaways:
+  - title: "Capability to to, co biznes robi, a nie jak to robi"
+    text: "Może je realizować człowiek, proces, maszyna albo kod. Dlatego mapa możliwości jest najstabilniejszym miejscem w biznesie: funkcje się zmieniają, a zdolność strumieniowania materiału zostaje ta sama dla filmu, serialu i podcastu."
+  - title: "Technologia rzadko jest przewagą konkurencyjną"
+    text: "McDonald's stoi na nieruchomościach i franczyzie, a platformy VOD nie wygrywają jakością streamingu, tylko treścią. Capability nie zawsze trzeba budować: Netflix zdolność produkcji filmów po prostu kupił."
+  - title: "Capability to heurystyka, nie granica bounded contextu"
+    text: "Mapowanie jeden do jednego jest dobre na start. Potem nakładamy inne heurystyki i modelujemy: jedno capability mogą realizować różne konteksty, a rzeczy takie jak dostępność zasobu w ogóle nie wynikają wprost z mapy."
+  - title: "Mapa zaczyna rozmowę z biznesem"
+    text: "Poziomy dojrzałości, capabilities strategiczne i mapy Wardleya pokazują, w jakim miejscu jest organizacja i co trzeba zmienić albo stworzyć pod nową funkcję. Zmiana systemu nie zawsze jest najtańszym sposobem."
+
+resources:
+  - kind: "Standard · Business Architecture Guild"
+    title: "BIZBOK Guide"
+    text: "Stąd definicja z odcinka: capability to konkretna zdolność, którą biznes może posiadać lub wymienić, aby osiągnąć określony cel lub wynik. Współzałożycielem Guild jest William Ulrich."
+    cta: "O przewodniku BIZBOK"
+    href: "https://www.businessarchitectureguild.org/page/BIZBOK"
+    icon: "menu_book"
+    ctaIcon: "open_in_new"
+    accent: "primary"
+  - kind: "Książka · DDD Reference"
+    title: "Eric Evans, „Domain-Driven Design Reference”"
+    text: "Struktury wielkiej skali i warstwy odpowiedzialności (potencjał, operacje, wsparcie decyzji), a także podział na domenę główną, wspierającą i generyczną."
+    cta: "Czytaj na domainlanguage.com"
+    href: "https://www.domainlanguage.com/ddd/reference/"
+    icon: "layers"
+    ctaIcon: "open_in_new"
+    accent: "primary"
+  - kind: "Kurs · Wardley Mapping"
+    title: "Learn Wardley Mapping"
+    text: "Oś ewolucji od genesis przez custom i product do commodity. Rozłożenie capabilities na takiej mapie pokazuje, gdzie organizacja faktycznie buduje przewagę."
+    cta: "Otwórz learnwardleymapping.com"
+    href: "https://learnwardleymapping.com/"
+    icon: "map"
+    ctaIcon: "open_in_new"
+    accent: "tertiary"
+  - kind: "Biografia"
+    title: "Ray Kroc"
+    text: "Człowiek, który zbudował sieć McDonald's na systemie franczyzowym i nieruchomościach. Przykład z odcinka na to, że biznes nie zaczyna się od kotleta."
+    cta: "Czytaj na Wikipedii"
+    href: "https://pl.wikipedia.org/wiki/Ray_Kroc"
+    icon: "storefront"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Raport · 2025"
+    title: "Microsoft Annual Report 2025"
+    text: "Azure, LinkedIn, Windows, Office, Xbox: wiele strumieni wartości w jednej korporacji i capabilities, które wspierają kilka modeli biznesowych naraz."
+    cta: "Czytaj raport"
+    href: "https://www.microsoft.com/investor/reports/ar25/index.html"
+    icon: "monitoring"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
+  - kind: "Psychologia"
+    title: "Torowanie (priming)"
+    text: "Dlaczego po słowach „scoring” i „compliance” Kamil od razu zobaczył bank, a nie laboratoria i sprzęt medyczny."
+    cta: "Czytaj na Wikipedii"
+    href: "https://pl.wikipedia.org/wiki/Torowanie"
+    icon: "psychology"
+    ctaIcon: "open_in_new"
+    accent: "neutral"
